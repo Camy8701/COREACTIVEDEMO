@@ -1,0 +1,23 @@
+[
+  { "title": "Join the BALLINFIT family", "route": "/" },
+  { "title": "Contact", "route": "/pages/contact/" },
+  { "title": "Memberships", "route": "/pages/memberships/" },
+  { "title": "Personal Training", "route": "/pages/personal-training/" },
+  { "title": "Meet the Trainers", "route": "/pages/meet-the-trainers/" },
+  { "title": "FAQ", "route": "/pages/faq/" },
+  { "title": "Classes", "route": "/pages/classes/" },
+  { "title": "Rookie", "route": "/pages/rookie/" },
+  { "title": "BALLIN Fitness Memberships", "route": "/pages/ballin-fitness-memberships/" },
+  { "title": "Group Class Memberships", "route": "/pages/group-class-memberships/" },
+  { "title": "Kids", "route": "/pages/kids/" },
+  { "title": "Community", "route": "/pages/community/" },
+  { "title": "Promo", "route": "/pages/promo/" },
+  { "title": "Schedule", "route": "/pages/schedule/" },
+  { "title": "Hyrox", "route": "/pages/hyrox/" },
+  { "title": "Free Trial", "route": "/pages/free-trial/" },
+  { "title": "Memberships V2", "route": "/pages/memberships-v2/" },
+  { "title": "Get Credits", "route": "/pages/get-credits/" },
+  { "title": "Frontpage Collection", "route": "/collections/frontpage/" },
+  { "title": "Memberships Collection", "route": "/collections/memberships/" },
+  { "title": "BALLINFIT CAMO RUNNING SET", "route": "/products/ballinfit-camo-running-set/" }
+]

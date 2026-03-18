@@ -1,0 +1,13 @@
+{
+  "name": "core-active-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "replicate": "node scripts/replicate.mjs",
+    "verify:remote": "node scripts/verify-remote-deps.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  }
+}
