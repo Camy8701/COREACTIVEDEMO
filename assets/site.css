@@ -290,6 +290,59 @@
   box-shadow: var(--replica-auth-shadow);
 }
 
+.replica-auth-card--login {
+  width: min(100%, 360px);
+  padding: 30px 26px 24px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(28, 28, 28, 0.96), rgba(11, 11, 11, 0.94)),
+    var(--replica-auth-card);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(14px);
+}
+
+.replica-auth-card-logo {
+  display: block;
+  width: 94px;
+  margin: 2px auto 18px;
+}
+
+.replica-auth-mini {
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 247, 239, 0.54);
+}
+
+.replica-auth-card--login .replica-auth-form {
+  gap: 14px;
+}
+
+.replica-auth-card--login .replica-auth-field input {
+  padding: 14px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.replica-auth-card--login .replica-auth-password button {
+  right: 12px;
+  font-size: 0.7rem;
+}
+
+.replica-auth-card--login .replica-auth-meta {
+  justify-content: flex-start;
+  font-size: 0.84rem;
+}
+
+.replica-auth-card--login .replica-auth-check span {
+  color: rgba(255, 247, 239, 0.68);
+}
+
 .replica-auth-card > p {
   margin: 0;
 }
@@ -386,6 +439,25 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255, 247, 239, 0.64);
+}
+
+.replica-auth-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.replica-auth-link--subtle {
+  font-size: 0.76rem;
+  color: #75b7ff;
+  text-decoration: none;
+}
+
+.replica-auth-link--subtle:hover,
+.replica-auth-link--subtle:focus-visible {
+  text-decoration: underline;
+  outline: none;
 }
 
 .replica-auth-field input,
@@ -488,6 +560,11 @@
   outline: none;
 }
 
+.replica-auth-submit--login {
+  background: linear-gradient(135deg, #4da8f2, #3c92d9);
+  color: #fff;
+}
+
 .replica-auth-status {
   display: none;
   padding: 14px 16px;
@@ -567,6 +644,11 @@
   color: rgba(255, 247, 239, 0.46);
   font-size: 0.83rem;
   line-height: 1.7;
+}
+
+.replica-auth-footnote--center {
+  margin-top: 18px;
+  text-align: center;
 }
 
 @media (max-width: 960px) {
