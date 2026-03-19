@@ -1,4 +1,5 @@
 const fallbackCartKey = 'ballinfit-replica-cart';
+const authEmailKey = 'ballinfit-auth-email';
 
 const cartApi = window.__ballinfitCartApi || null;
 
@@ -200,11 +201,107 @@ const renderCartPage = () => {
     `<div class="replica-cart-total"><span>Total</span><span>${money(total / 100)}</span></div>`;
 };
 
+const setAuthStatus = (form, message, tone = 'success') => {
+  const status = form.querySelector('[data-auth-status]');
+  if (!status) {
+    return;
+  }
+
+  status.textContent = message;
+  status.classList.add('is-visible');
+  status.classList.toggle('is-error', tone === 'error');
+};
+
+const activateAuthTab = (page, tab) => {
+  page.dataset.authCurrent = tab;
+
+  page.querySelectorAll('[data-auth-tab]').forEach((button) => {
+    const isActive = button.getAttribute('data-auth-tab') === tab;
+    button.classList.toggle('is-active', isActive);
+    button.setAttribute('aria-selected', String(isActive));
+  });
+
+  page.querySelectorAll('[data-auth-panel]').forEach((panel) => {
+    panel.hidden = panel.getAttribute('data-auth-panel') !== tab;
+  });
+};
+
+const initAuthPage = () => {
+  const page = document.querySelector('[data-auth-page]');
+  if (!page) {
+    return;
+  }
+
+  const searchMode = new URLSearchParams(window.location.search).get('mode');
+  const defaultMode = searchMode || document.body.dataset.authDefault || 'login';
+  activateAuthTab(page, defaultMode);
+
+  page.querySelectorAll('[data-auth-tab], [data-auth-link-tab]').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const tab = button.getAttribute('data-auth-tab') || button.getAttribute('data-auth-link-tab');
+      if (!tab) {
+        return;
+      }
+      activateAuthTab(page, tab);
+    });
+  });
+
+  page.querySelectorAll('[data-toggle-password]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-toggle-password');
+      const input = targetId ? document.getElementById(targetId) : null;
+      if (!(input instanceof HTMLInputElement)) {
+        return;
+      }
+
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      button.textContent = show ? 'Hide' : 'Show';
+    });
+  });
+
+  const rememberedEmail = localStorage.getItem(authEmailKey);
+  if (rememberedEmail) {
+    page.querySelectorAll('input[name="email"]').forEach((input) => {
+      if (input instanceof HTMLInputElement && !input.value) {
+        input.value = rememberedEmail;
+      }
+    });
+  }
+
+  page.querySelectorAll('[data-auth-form]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const mode = form.getAttribute('data-auth-form') || 'login';
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      if (typeof data.email === 'string' && data.email) {
+        localStorage.setItem(authEmailKey, data.email);
+      }
+
+      if (mode === 'signup' && data.password !== data.confirm_password) {
+        setAuthStatus(form, 'Passwords need to match before this form is connected to Supabase.', 'error');
+        return;
+      }
+
+      if (mode === 'login') {
+        setAuthStatus(form, 'Login flow is ready. Connect this form to Supabase `signInWithPassword()` next.');
+        return;
+      }
+
+      setAuthStatus(form, 'Sign-up flow is ready. Connect this form to Supabase `signUp()` and your profile table next.');
+    });
+  });
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   renderCartCount();
   bindProductForms();
   bindShareInputs();
   renderCartPage();
+  initAuthPage();
 
   document.querySelectorAll('a[href$="checkout/"], a[href$="checkout"]').forEach((node) => {
     node.addEventListener('click', (event) => {

@@ -1,21 +1,159 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
     <title>Join | BALLINFIT Replica</title>
     <link rel="stylesheet" href="../assets/site.css">
-    
-<script src="../assets/standalone-shim.js"></script>
-<script defer="" src="../assets/site.js"></script>
+    <script src="../assets/standalone-shim.js"></script>
+    <script defer="" src="../assets/site.js"></script>
   </head>
-  <body>
-    <main class="replica-shell">
-      <section class="replica-card">
-        <p>Standalone BALLINFIT replica</p>
-        <h1 class="replica-title">Membership handoff placeholder</h1>
-        <p class="replica-copy">Membership signup on the source site is powered by Virtuagym. This local page replaces that dependency with a static handoff so the replica stays fully self-contained.</p>
-        <div class="replica-actions">
-          <a class="replica-button" href="../pages/free-trial/">Start from the free-trial page</a>
-          <a class="replica-button replica-button--ghost" href="../pages/memberships/">See plan details</a>
+  <body class="replica-auth-page" data-auth-default="signup" style="--replica-auth-image:url('../assets/origin/ballinfit/cdn/shop/files/JFB-09225--fe606a86.jpg')">
+    <main class="replica-auth-layout" data-auth-page="">
+      <section class="replica-auth-media">
+        <a class="replica-auth-brand" href="../index.html">
+          <img src="../assets/origin/ballinfit/cdn/shop/files/BALLINFIT_white_logo_v2--41b0b94b.svg" alt="BALLINFIT">
+          <span>Ballinfit Access</span>
+        </a>
+
+        <div class="replica-auth-story">
+          <span class="replica-auth-kicker">Membership Start</span>
+          <h1>Build your access.</h1>
+          <p>
+            Start the sign-up flow here, then connect it to Supabase later for real authentication, profile onboarding, and gated member features without redesigning the page.
+          </p>
+
+          <div class="replica-auth-proof">
+            <div>
+              <strong>Fast</strong>
+              <span>sign-up path for memberships and trials</span>
+            </div>
+            <div>
+              <strong>Clean</strong>
+              <span>same visual language as the BALLINFIT site</span>
+            </div>
+            <div>
+              <strong>Future</strong>
+              <span>ready for Supabase auth and row-level data</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="replica-auth-panel">
+        <div class="replica-auth-card">
+          <p class="replica-auth-chip">Member onboarding</p>
+          <h2>Join BALLINFIT</h2>
+          <p class="replica-auth-intro">
+            This is the standalone sign-up front-end for your repo. It already covers the UI states you’ll need once email/password auth is connected in Supabase.
+          </p>
+
+          <div class="replica-auth-tabs" role="tablist" aria-label="Authentication mode">
+            <button class="replica-auth-tab" type="button" data-auth-tab="login" aria-selected="false">Log In</button>
+            <button class="replica-auth-tab" type="button" data-auth-tab="signup" aria-selected="true">Sign Up</button>
+          </div>
+
+          <form class="replica-auth-form" data-auth-form="login" data-auth-panel="login" hidden="">
+            <div class="replica-auth-field">
+              <label for="join-login-email">Email</label>
+              <input id="join-login-email" name="email" type="email" placeholder="you@ballinfit.com" autocomplete="email" required="">
+            </div>
+
+            <div class="replica-auth-field">
+              <label for="join-login-password">Password</label>
+              <div class="replica-auth-password">
+                <input id="join-login-password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required="">
+                <button type="button" data-toggle-password="join-login-password">Show</button>
+              </div>
+            </div>
+
+            <div class="replica-auth-meta">
+              <label class="replica-auth-check">
+                <input name="remember_me" type="checkbox" value="yes">
+                <span>Remember this device</span>
+              </label>
+              <a class="replica-auth-link" href="../pages/contact/index.html">Contact support</a>
+            </div>
+
+            <button class="replica-auth-submit" type="submit">Log in</button>
+            <div class="replica-auth-status" data-auth-status="" aria-live="polite"></div>
+
+            <p class="replica-auth-footnote">
+              Need a new profile first? <a class="replica-auth-link" href="#" data-auth-link-tab="signup">Switch to sign up</a>.
+            </p>
+          </form>
+
+          <form class="replica-auth-form" data-auth-form="signup" data-auth-panel="signup">
+            <div class="replica-auth-grid">
+              <div class="replica-auth-field">
+                <label for="join-name">Full Name</label>
+                <input id="join-name" name="full_name" type="text" placeholder="Your name" autocomplete="name" required="">
+              </div>
+
+              <div class="replica-auth-field">
+                <label for="join-goal">First Focus</label>
+                <select id="join-goal" name="goal" required="">
+                  <option value="">Choose a focus</option>
+                  <option>Ballin Fitness</option>
+                  <option>Group classes</option>
+                  <option>Personal training</option>
+                  <option>Rookie / youth training</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="replica-auth-field">
+              <label for="join-email">Email</label>
+              <input id="join-email" name="email" type="email" placeholder="you@ballinfit.com" autocomplete="email" required="">
+            </div>
+
+            <div class="replica-auth-grid">
+              <div class="replica-auth-field">
+                <label for="join-password">Password</label>
+                <div class="replica-auth-password">
+                  <input id="join-password" name="password" type="password" placeholder="Create password" autocomplete="new-password" required="">
+                  <button type="button" data-toggle-password="join-password">Show</button>
+                </div>
+              </div>
+
+              <div class="replica-auth-field">
+                <label for="join-confirm-password">Confirm Password</label>
+                <div class="replica-auth-password">
+                  <input id="join-confirm-password" name="confirm_password" type="password" placeholder="Repeat password" autocomplete="new-password" required="">
+                  <button type="button" data-toggle-password="join-confirm-password">Show</button>
+                </div>
+              </div>
+            </div>
+
+            <label class="replica-auth-check">
+              <input name="updates" type="checkbox" value="yes">
+              <span>Keep me updated on memberships, credits, and class launches.</span>
+            </label>
+
+            <label class="replica-auth-check">
+              <input name="consent" type="checkbox" value="yes" required="">
+              <span>I’m ready for the account to be connected to Supabase later.</span>
+            </label>
+
+            <button class="replica-auth-submit" type="submit">Create account shell</button>
+            <div class="replica-auth-status" data-auth-status="" aria-live="polite"></div>
+
+            <div class="replica-auth-divider">next</div>
+
+            <div class="replica-auth-aux">
+              <a href="../pages/free-trial/index.html">
+                <strong>Start with a free trial</strong>
+                <span>See the local free-trial route before checkout</span>
+              </a>
+              <a href="../pages/memberships/index.html">
+                <strong>View memberships</strong>
+                <span>Compare plans before connecting payments</span>
+              </a>
+            </div>
+
+            <p class="replica-auth-footnote">
+              Already have an account? <a class="replica-auth-link" href="../account/index.html">Go to login</a>.
+            </p>
+          </form>
         </div>
       </section>
     </main>

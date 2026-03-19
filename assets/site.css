@@ -1,1 +1,639 @@
-:root{--replica-accent:#101010;--replica-soft:#f3f3f3;--replica-line:rgba(0,0,0,.12)}.replica-shell{max-width:960px;margin:0 auto;padding:96px 24px}.replica-card{background:#fff;border:1px solid var(--replica-line);border-radius:24px;padding:32px;box-shadow:0 18px 60px rgba(0,0,0,.06)}.replica-title{font-size:clamp(2rem,4vw,3.25rem);line-height:1;letter-spacing:-.04em;margin:0 0 16px}.replica-copy{max-width:48rem;font-size:1rem;line-height:1.65}.replica-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.replica-button{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:14px 22px;background:#111;color:#fff;text-decoration:none;font-weight:700}.replica-button--ghost{background:transparent;color:#111;border:1px solid var(--replica-line)}.replica-form-note{margin-top:12px;color:rgba(0,0,0,.65);font-size:.95rem}.replica-inline-message{margin-top:12px;font-size:.95rem;color:#0b5d1e}.replica-cart-page .product-item{display:grid;grid-template-columns:96px 1fr auto;gap:16px;align-items:center;padding:18px 0;border-top:1px solid var(--replica-line)}.replica-cart-page .product-item:first-child{border-top:0}.replica-cart-page img{width:96px;height:96px;object-fit:cover;border-radius:18px}.replica-cart-total{display:flex;justify-content:space-between;gap:16px;font-weight:700;padding-top:18px;margin-top:18px;border-top:1px solid var(--replica-line)}@media (max-width:720px){.replica-shell{padding:72px 18px}.replica-card{padding:24px}.replica-cart-page .product-item{grid-template-columns:72px 1fr}.replica-cart-page .product-item .replica-price{grid-column:2}}
+@font-face {
+  font-family: 'Instrument Sans Replica';
+  src: url('./origin/ballinfit/cdn/fonts/instrument_sans/instrumentsans_n7.e4ad9032e203f9a0977786c356573ced65a7419a.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --replica-accent: #101010;
+  --replica-soft: #f3f3f3;
+  --replica-line: rgba(0, 0, 0, 0.12);
+  --replica-sage: #7da1a9;
+  --replica-olive: #8fa18d;
+  --replica-auth-bg: #090909;
+  --replica-auth-card: #141414;
+  --replica-auth-surface: rgba(255, 255, 255, 0.06);
+  --replica-auth-line: rgba(255, 255, 255, 0.1);
+  --replica-auth-copy: rgba(255, 247, 239, 0.78);
+  --replica-auth-highlight: #d9cbc1;
+  --replica-auth-shadow: 0 24px 90px rgba(0, 0, 0, 0.32);
+}
+
+.replica-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 96px 24px;
+}
+
+.replica-card {
+  background: #fff;
+  border: 1px solid var(--replica-line);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.06);
+}
+
+.replica-title {
+  font-family: 'Instrument Sans Replica', 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0 0 16px;
+}
+
+.replica-copy {
+  max-width: 48rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.replica-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.replica-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 14px 22px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.replica-button--ghost {
+  background: transparent;
+  color: #111;
+  border: 1px solid var(--replica-line);
+}
+
+.replica-form-note {
+  margin-top: 12px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 0.95rem;
+}
+
+.replica-inline-message {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #0b5d1e;
+}
+
+.replica-cart-page .product-item {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 0;
+  border-top: 1px solid var(--replica-line);
+}
+
+.replica-cart-page .product-item:first-child {
+  border-top: 0;
+}
+
+.replica-cart-page img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.replica-cart-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 700;
+  padding-top: 18px;
+  margin-top: 18px;
+  border-top: 1px solid var(--replica-line);
+}
+
+.replica-auth-page {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(125, 161, 169, 0.18), transparent 38%),
+    radial-gradient(circle at bottom right, rgba(143, 161, 141, 0.12), transparent 34%),
+    var(--replica-auth-bg);
+  color: #fff7ef;
+  font-family: 'Instrument Sans Replica', 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.replica-auth-page * {
+  box-sizing: border-box;
+}
+
+.replica-auth-page a {
+  color: inherit;
+}
+
+.replica-auth-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+}
+
+.replica-auth-media {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 56vh;
+  padding: 36px;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.replica-auth-media::before {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.76)),
+    var(--replica-auth-image);
+  background-position: center;
+  background-size: cover;
+  filter: saturate(0.88) contrast(1.02);
+}
+
+.replica-auth-media::after {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border-radius: 32px;
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.08), transparent 28%),
+    linear-gradient(0deg, rgba(125, 161, 169, 0.14), rgba(125, 161, 169, 0));
+  pointer-events: none;
+}
+
+.replica-auth-brand,
+.replica-auth-story {
+  position: relative;
+  z-index: 1;
+}
+
+.replica-auth-brand {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.replica-auth-brand img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.replica-auth-brand span {
+  font-size: 0.88rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.replica-auth-story {
+  max-width: 34rem;
+  padding: 0 12px 18px 12px;
+}
+
+.replica-auth-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 247, 239, 0.68);
+}
+
+.replica-auth-kicker::before {
+  content: '';
+  width: 36px;
+  height: 1px;
+  background: rgba(255, 247, 239, 0.46);
+}
+
+.replica-auth-story h1 {
+  margin: 18px 0 14px;
+  font-size: clamp(2.8rem, 5vw, 5.7rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+
+.replica-auth-story p {
+  max-width: 28rem;
+  margin: 0;
+  color: var(--replica-auth-copy);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.replica-auth-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.replica-auth-proof div {
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 18px;
+  background: rgba(9, 9, 9, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.replica-auth-proof strong {
+  display: block;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.replica-auth-proof span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 247, 239, 0.62);
+}
+
+.replica-auth-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 28px;
+}
+
+.replica-auth-card {
+  width: min(100%, 490px);
+  padding: 32px;
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
+    var(--replica-auth-card);
+  border: 1px solid var(--replica-auth-line);
+  box-shadow: var(--replica-auth-shadow);
+}
+
+.replica-auth-card > p {
+  margin: 0;
+}
+
+.replica-auth-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(125, 161, 169, 0.14);
+  color: #dce8eb;
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.replica-auth-card h2 {
+  margin: 18px 0 10px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+}
+
+.replica-auth-intro {
+  margin: 0 0 24px;
+  color: var(--replica-auth-copy);
+  line-height: 1.7;
+}
+
+.replica-auth-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 6px;
+  margin-bottom: 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.replica-auth-tab {
+  appearance: none;
+  border: 0;
+  padding: 13px 16px;
+  border-radius: 16px;
+  background: transparent;
+  color: rgba(255, 247, 239, 0.56);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.replica-auth-tab:hover,
+.replica-auth-tab:focus-visible {
+  color: #fff;
+  outline: none;
+}
+
+.replica-auth-tab.is-active {
+  background: linear-gradient(135deg, rgba(217, 203, 193, 0.22), rgba(125, 161, 169, 0.16));
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.replica-auth-form {
+  display: grid;
+  gap: 16px;
+}
+
+.replica-auth-form[hidden],
+.replica-auth-panel-body[hidden] {
+  display: none !important;
+}
+
+.replica-auth-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.replica-auth-field {
+  display: grid;
+  gap: 8px;
+}
+
+.replica-auth-field label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 247, 239, 0.64);
+}
+
+.replica-auth-field input,
+.replica-auth-field select,
+.replica-auth-field textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  padding: 15px 16px;
+  font: inherit;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.replica-auth-field input::placeholder,
+.replica-auth-field textarea::placeholder {
+  color: rgba(255, 247, 239, 0.34);
+}
+
+.replica-auth-field input:focus,
+.replica-auth-field select:focus,
+.replica-auth-field textarea:focus {
+  outline: none;
+  border-color: rgba(125, 161, 169, 0.75);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 4px rgba(125, 161, 169, 0.12);
+}
+
+.replica-auth-password {
+  position: relative;
+}
+
+.replica-auth-password button {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: rgba(255, 247, 239, 0.65);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.replica-auth-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(255, 247, 239, 0.72);
+  font-size: 0.92rem;
+}
+
+.replica-auth-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.replica-auth-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--replica-sage);
+}
+
+.replica-auth-link {
+  color: var(--replica-auth-highlight);
+  text-decoration: none;
+}
+
+.replica-auth-link:hover,
+.replica-auth-link:focus-visible {
+  text-decoration: underline;
+}
+
+.replica-auth-submit {
+  appearance: none;
+  border: 0;
+  padding: 16px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #d6c4b7, #90a7ab);
+  color: #111;
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.replica-auth-submit:hover,
+.replica-auth-submit:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  outline: none;
+}
+
+.replica-auth-status {
+  display: none;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(125, 161, 169, 0.12);
+  border: 1px solid rgba(125, 161, 169, 0.28);
+  color: #dfe8ea;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.replica-auth-status.is-visible {
+  display: block;
+}
+
+.replica-auth-status.is-error {
+  background: rgba(137, 31, 31, 0.22);
+  border-color: rgba(255, 130, 130, 0.32);
+  color: #ffd8d8;
+}
+
+.replica-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255, 247, 239, 0.42);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.replica-auth-divider::before,
+.replica-auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.replica-auth-aux {
+  display: grid;
+  gap: 10px;
+}
+
+.replica-auth-aux a {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 15px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+  color: rgba(255, 247, 239, 0.84);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.replica-auth-aux a:hover,
+.replica-auth-aux a:focus-visible {
+  border-color: rgba(125, 161, 169, 0.38);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.replica-auth-aux strong {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.replica-auth-aux span {
+  color: rgba(255, 247, 239, 0.5);
+}
+
+.replica-auth-footnote {
+  margin-top: 24px;
+  color: rgba(255, 247, 239, 0.46);
+  font-size: 0.83rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 960px) {
+  .replica-auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .replica-auth-media {
+    min-height: 44vh;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .replica-auth-brand {
+    top: 28px;
+    left: 28px;
+  }
+}
+
+@media (max-width: 720px) {
+  .replica-shell {
+    padding: 72px 18px;
+  }
+
+  .replica-card {
+    padding: 24px;
+  }
+
+  .replica-cart-page .product-item {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .replica-cart-page .product-item .replica-price {
+    grid-column: 2;
+  }
+
+  .replica-auth-media,
+  .replica-auth-panel {
+    padding: 20px;
+  }
+
+  .replica-auth-media::before,
+  .replica-auth-media::after {
+    inset: 0;
+    border-radius: 0;
+  }
+
+  .replica-auth-story {
+    padding: 74px 4px 6px;
+  }
+
+  .replica-auth-story h1 {
+    font-size: clamp(2.3rem, 14vw, 4rem);
+  }
+
+  .replica-auth-proof,
+  .replica-auth-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .replica-auth-card {
+    padding: 24px 18px;
+    border-radius: 24px;
+  }
+
+  .replica-auth-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

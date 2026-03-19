@@ -29,6 +29,7 @@ async function main() {
     normalizePreloads($);
     rewriteAttributes($, htmlFile);
     rewriteInlineScripts($, htmlFile);
+    rewriteStandaloneAuxLinks($, htmlFile);
     ensureStandaloneShim($, htmlFile);
 
     await fs.writeFile(htmlFile, $.html());
@@ -153,6 +154,28 @@ function ensureStandaloneShim($, htmlFile) {
   }
 
   $('head').append(`\n${shimTag}\n`);
+}
+
+function rewriteStandaloneAuxLinks($, htmlFile) {
+  $('a[href]').each((_, element) => {
+    const anchor = $(element);
+    const text = anchor.text().replace(/\s+/g, ' ').trim().toLowerCase();
+    const href = anchor.attr('href') || '';
+
+    if (text.includes('download app') || /apps\.apple\.com\/.*\/ballinfit/i.test(href)) {
+      const removable = anchor.closest('.sliderule__wrapper, .toolbar__navlink');
+      if (removable.length) {
+        removable.remove();
+      } else {
+        anchor.remove();
+      }
+      return;
+    }
+
+    if (text === 'log in' || text.includes('log in to account')) {
+      anchor.attr('href', relativeFromHtml(htmlFile, 'account/index.html'));
+    }
+  });
 }
 
 function rewriteText(input, htmlFile) {
