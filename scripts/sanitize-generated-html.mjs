@@ -26,8 +26,10 @@ async function main() {
     const $ = cheerio.load(html, { decodeEntities: false });
 
     removeUnusedNodes($);
+    normalizePreloads($);
     rewriteAttributes($, htmlFile);
     rewriteInlineScripts($, htmlFile);
+    ensureStandaloneShim($, htmlFile);
 
     await fs.writeFile(htmlFile, $.html());
   }
@@ -101,6 +103,56 @@ function rewriteInlineScripts($, htmlFile) {
       $(element).html(rewritten);
     }
   });
+}
+
+function normalizePreloads($) {
+  const seenHrefs = new Set();
+
+  $('link[rel="preload"][href]').each((_, element) => {
+    const link = $(element);
+    const href = link.attr('href');
+    if (!href) {
+      return;
+    }
+
+    if (seenHrefs.has(href)) {
+      link.remove();
+      return;
+    }
+    seenHrefs.add(href);
+
+    if (/\.css(?:[?#].*)?$/i.test(href)) {
+      link.attr('as', 'style');
+      link.attr('type', 'text/css');
+      return;
+    }
+
+    if (/\.(woff2?|ttf|otf)(?:[?#].*)?$/i.test(href)) {
+      link.remove();
+    }
+  });
+}
+
+function ensureStandaloneShim($, htmlFile) {
+  const shimPath = relativeFromHtml(htmlFile, 'assets/standalone-shim.js');
+  if ($(`script[src="${shimPath}"]`).length) {
+    return;
+  }
+
+  const shimTag = `<script src="${shimPath}"></script>`;
+  const themeScript = $('script[src*="vendor--"], script[src*="theme--"]').first();
+  if (themeScript.length) {
+    themeScript.before(`\n${shimTag}\n`);
+    return;
+  }
+
+  const siteScript = $('script[src$="assets/site.js"]').first();
+  if (siteScript.length) {
+    siteScript.before(`\n${shimTag}\n`);
+    return;
+  }
+
+  $('head').append(`\n${shimTag}\n`);
 }
 
 function rewriteText(input, htmlFile) {
