@@ -455,16 +455,14 @@
 }
 
 :root {
-  --ca-header-width: min(calc(100% - 164px), 1320px);
-  --ca-header-bg: rgba(10, 12, 15, 0.28);
+  --ca-header-width: min(calc(100% - 40px), 1400px);
   --ca-header-line: rgba(255, 255, 255, 0.12);
-  --ca-header-line-soft: rgba(255, 255, 255, 0.08);
   --ca-header-copy: rgba(250, 246, 238, 0.92);
   --ca-header-copy-muted: rgba(250, 246, 238, 0.8);
   --ca-header-copy-dim: rgba(250, 246, 238, 0.46);
-  --ca-header-glow: rgba(255, 255, 255, 0.22);
-  --ca-header-hover: rgba(255, 255, 255, 0.06);
-  --ca-logo-width: 72px;
+  --ca-header-glow: rgba(255, 255, 255, 0.18);
+  --ca-header-hover: rgba(255, 255, 255, 0.04);
+  --ca-logo-width: 86px;
 }
 
 body.replica-mobile-menu-open {
@@ -495,49 +493,17 @@ body.replica-mobile-menu-open {
   pointer-events: auto;
 }
 
-.ca-floating-logo {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 90px;
-  height: 90px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 24px;
-  background: rgba(9, 11, 14, 0.22);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.26);
-  backdrop-filter: blur(22px) saturate(140%);
-  text-decoration: none;
-}
-
-.ca-floating-logo img {
-  display: block;
-  width: var(--ca-logo-width);
-  height: auto;
-}
-
 .ca-header-shell {
   position: relative;
   width: var(--ca-header-width);
-  margin: 18px 18px 0 auto;
-  border: 1px solid var(--ca-header-line);
-  border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 42%),
-    linear-gradient(120deg, rgba(255, 255, 255, 0.04), transparent 38%),
-    var(--ca-header-bg);
-  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.24);
-  backdrop-filter: blur(24px) saturate(150%);
+  margin: 18px auto 0;
   overflow: visible;
 }
 
 .ca-header-shell::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: -8px;
   left: 50%;
   width: min(100%, 420px);
   height: 1px;
@@ -547,10 +513,12 @@ body.replica-mobile-menu-open {
 }
 
 .ca-header-desktop-bar {
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  min-height: 58px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  justify-content: center;
+  column-gap: 30px;
+  min-height: 48px;
 }
 
 .ca-primary-nav,
@@ -560,7 +528,7 @@ body.replica-mobile-menu-open {
 
 .ca-primary-nav {
   display: flex;
-  align-items: stretch;
+  align-items: center;
 }
 
 .ca-primary-nav--left {
@@ -570,8 +538,8 @@ body.replica-mobile-menu-open {
 .ca-nav-list {
   list-style: none;
   display: flex;
-  align-items: stretch;
-  gap: 0;
+  align-items: center;
+  gap: 18px;
   margin: 0;
   padding: 0;
   min-width: 0;
@@ -580,11 +548,7 @@ body.replica-mobile-menu-open {
 .ca-nav-item {
   position: relative;
   display: flex;
-  align-items: stretch;
-}
-
-.ca-nav-item + .ca-nav-item {
-  border-left: 1px solid var(--ca-header-line-soft);
+  align-items: center;
 }
 
 .ca-nav-link,
@@ -597,12 +561,12 @@ body.replica-mobile-menu-open {
   justify-content: center;
   gap: 8px;
   position: relative;
-  min-height: 58px;
-  padding: 0 18px;
+  min-height: 0;
+  padding: 0;
   font: inherit;
-  font-size: 0.87rem;
+  font-size: 0.98rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ca-header-copy);
@@ -628,10 +592,10 @@ body.replica-mobile-menu-open {
 .ca-nav-trigger::after {
   content: '';
   position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 11px;
-  height: 1.5px;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 1px;
   transform: scaleX(0);
   transform-origin: center;
   background: rgba(255, 255, 255, 0.92);
@@ -660,12 +624,18 @@ body.replica-mobile-menu-open {
   transform: rotate(180deg);
 }
 
+.ca-logo-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .ca-logo-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 16px 24px;
+  width: auto;
+  padding: 0;
   text-decoration: none;
 }
 
@@ -677,9 +647,10 @@ body.replica-mobile-menu-open {
 
 .ca-header-right {
   display: flex;
-  align-items: stretch;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: flex-start;
   padding-right: 0;
+  gap: 20px;
 }
 
 .ca-primary-nav--right .ca-nav-list {
@@ -689,32 +660,29 @@ body.replica-mobile-menu-open {
 .ca-header-utility {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 20px;
   margin-left: 0;
-  padding-left: 16px;
-  border-left: 1px solid var(--ca-header-line);
+  padding-left: 0;
+  border-left: 0;
 }
 
 .ca-language-toggle {
   display: inline-flex;
   align-items: center;
-  overflow: hidden;
-  border: 1px solid var(--ca-header-line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.02);
+  gap: 8px;
 }
 
 .ca-language-option {
   appearance: none;
   border: 0;
   background: transparent;
-  min-width: 44px;
-  height: 34px;
-  padding: 0 12px;
+  min-width: 0;
+  height: auto;
+  padding: 0;
   font: inherit;
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ca-header-copy-dim);
   cursor: pointer;
@@ -723,14 +691,9 @@ body.replica-mobile-menu-open {
     color 180ms ease;
 }
 
-.ca-language-option + .ca-language-option {
-  border-left: 1px solid var(--ca-header-line);
-}
-
 .ca-language-option.is-active,
 .ca-language-option:hover,
 .ca-language-option:focus-visible {
-  background: rgba(255, 255, 255, 0.06);
   color: #fff;
   outline: none;
 }
@@ -738,20 +701,19 @@ body.replica-mobile-menu-open {
 .ca-auth-links {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 18px;
 }
 
 .ca-auth-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 58px;
-  padding: 0 18px;
-  border-left: 1px solid var(--ca-header-line-soft);
-  border-radius: 0;
-  font-size: 0.78rem;
+  min-height: 0;
+  padding: 0;
+  border-left: 0;
+  font-size: 0.92rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ca-header-copy);
@@ -763,32 +725,29 @@ body.replica-mobile-menu-open {
 
 .ca-auth-link:hover,
 .ca-auth-link:focus-visible {
-  background: rgba(255, 255, 255, 0.04);
   color: #fff;
   outline: none;
 }
 
 .ca-auth-link--signup {
-  background: rgba(255, 255, 255, 0.07);
   color: #fff;
 }
 
 .ca-auth-link--shop {
-  background: rgba(246, 234, 195, 0.18);
-  color: #fff;
+  color: #f3ddb1;
 }
 
 .ca-floating-menu {
   position: absolute;
   top: calc(100% + 12px);
-  left: 0;
+  left: 50%;
   display: grid;
-  gap: 10px;
-  min-width: 240px;
+  gap: 12px;
+  min-width: 0;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-8px);
+  transform: translate(-50%, -8px);
   transition:
     opacity 180ms ease,
     visibility 180ms ease,
@@ -799,29 +758,22 @@ body.replica-mobile-menu-open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
 .ca-floating-link {
   display: block;
-  padding: 14px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 15px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 42%),
-    rgba(10, 12, 15, 0.26);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(22px) saturate(150%);
+  padding: 0;
   color: #fff;
-  font-size: 0.92rem;
+  font-size: 0.98rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   line-height: 1.2;
   text-transform: uppercase;
   text-decoration: none;
   transition:
     transform 180ms ease,
-    background-color 180ms ease;
+    opacity 180ms ease;
 }
 
 .ca-floating-link:hover,
@@ -838,20 +790,17 @@ body.replica-mobile-menu-open {
 @media (max-width: 1360px) and (min-width: 1180px) {
   .ca-nav-link,
   .ca-nav-trigger {
-    padding: 0 15px;
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
   }
 
   .ca-header-utility {
     gap: 10px;
-    margin-left: 12px;
-    padding-left: 12px;
+    padding-left: 0;
   }
 
   .ca-auth-link {
-    padding: 0 15px;
-    font-size: 0.72rem;
+    font-size: 0.84rem;
   }
 }
 
@@ -863,21 +812,8 @@ body.replica-mobile-menu-open {
   }
 
   .ca-header-shell {
-    width: auto;
-    margin: 12px 12px 0 96px;
-    border-radius: 16px;
-  }
-
-  .ca-floating-logo {
-    top: 12px;
-    left: 12px;
-    width: 74px;
-    height: 74px;
-    border-radius: 20px;
-  }
-
-  .ca-floating-logo img {
-    width: 58px;
+    width: min(calc(100% - 24px), 520px);
+    margin: 10px auto 0;
   }
 
   .ca-header-desktop-bar {
@@ -885,12 +821,12 @@ body.replica-mobile-menu-open {
   }
 
   .ca-mobile-bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 36px auto 1fr;
     align-items: center;
-    justify-content: flex-end;
     gap: 12px;
-    min-height: 54px;
-    padding: 0 12px 0 18px;
+    min-height: 44px;
+    padding: 0;
   }
 
   .ca-mobile-toggle,
@@ -906,12 +842,8 @@ body.replica-mobile-menu-open {
   }
 
   .ca-mobile-toggle {
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(18px);
+    width: auto;
+    height: auto;
   }
 
   .ca-mobile-toggle svg,
@@ -920,14 +852,22 @@ body.replica-mobile-menu-open {
     height: 18px;
   }
 
+  .ca-logo-link--mobile {
+    justify-self: center;
+  }
+
+  .ca-logo-link--mobile img {
+    width: 64px;
+  }
+
   .ca-mobile-meta {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 0;
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     font-weight: 800;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--ca-header-copy);
   }

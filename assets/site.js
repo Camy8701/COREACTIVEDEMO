@@ -334,10 +334,6 @@ const renderReplicaHeader = (config, locale) => {
     config.languages.find((language) => language.code === locale)?.label || locale.toUpperCase();
 
   return `<header class="replica-site-header" role="banner">
-    <a class="ca-floating-logo" href="${siteUrl(config.logo.href)}" aria-label="CoreActive home">
-      <img src="${siteUrl(config.logo.src)}" alt="${escapeHtml(config.logo.alt)}" loading="eager">
-    </a>
-
     <div class="ca-header-shell" data-ca-header-shell>
       <div class="ca-header-desktop-bar">
         <nav class="ca-primary-nav ca-primary-nav--left" aria-label="Primary navigation">
@@ -345,6 +341,11 @@ const renderReplicaHeader = (config, locale) => {
             ${config.left.map(renderDesktopItem).join('')}
           </ul>
         </nav>
+        <div class="ca-logo-slot">
+          <a class="ca-logo-link" href="${siteUrl(config.logo.href)}" aria-label="CoreActive home">
+            <img src="${siteUrl(config.logo.src)}" alt="${escapeHtml(config.logo.alt)}" loading="eager">
+          </a>
+        </div>
         <div class="ca-header-right">
           <nav class="ca-primary-nav ca-primary-nav--right" aria-label="Secondary navigation">
             <ul class="ca-nav-list">
@@ -369,12 +370,17 @@ const renderReplicaHeader = (config, locale) => {
       </div>
 
       <div class="ca-mobile-bar">
-        <div class="ca-mobile-meta">
-          <span data-locale-current>${escapeHtml(localeLabel)}</span>
-        </div>
         <button type="button" class="ca-mobile-toggle" data-mobile-toggle aria-expanded="false" aria-controls="ca-mobile-drawer" aria-label="Open navigation menu">
           ${svgIcons.menu}
         </button>
+        <a class="ca-logo-link ca-logo-link--mobile" href="${siteUrl(
+          config.logo.href
+        )}" aria-label="CoreActive home">
+          <img src="${siteUrl(config.logo.src)}" alt="${escapeHtml(config.logo.alt)}" loading="eager">
+        </a>
+        <div class="ca-mobile-meta">
+          <span data-locale-current>${escapeHtml(localeLabel)}</span>
+        </div>
       </div>
     </div>
 
