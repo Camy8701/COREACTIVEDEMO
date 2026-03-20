@@ -213,6 +213,7 @@ const buildHeaderConfig = () => ({
   auth: {
     signIn: { label: 'Sign In', href: 'account/index.html' },
     signUp: { label: 'Sign Up', href: 'join/index.html' },
+    shop: { label: 'Shop', href: 'collections/frontpage/index.html' },
   },
   mobileDirectLinks: [
     { label: 'Schedule', href: 'pages/schedule/index.html' },
@@ -278,6 +279,11 @@ const renderDesktopItem = (item) => {
   const active = headerItemIsCurrent(item);
 
   if (item.kind === 'mega') {
+    const dropdownLinks =
+      item.mobileLinks?.length
+        ? item.mobileLinks
+        : item.columns?.flatMap((column) => column.links) || [];
+
     return `<li class="ca-nav-item${active ? ' is-current' : ''}">
       <button type="button" class="ca-nav-trigger" data-menu-trigger="${escapeHtml(
         item.key
@@ -285,6 +291,16 @@ const renderDesktopItem = (item) => {
         <span>${escapeHtml(item.label)}</span>
         ${svgIcons.chevron}
       </button>
+      <div class="ca-floating-menu" data-menu-panel="${escapeHtml(item.key)}" id="ca-panel-${escapeHtml(
+        item.key
+      )}" hidden>
+        ${dropdownLinks
+          .map(
+            (link) =>
+              `<a class="ca-floating-link" href="${siteUrl(link.href)}">${escapeHtml(link.label)}</a>`
+          )
+          .join('')}
+      </div>
     </li>`;
   }
 
@@ -292,30 +308,6 @@ const renderDesktopItem = (item) => {
     <a class="ca-nav-link" href="${siteUrl(item.href)}">${escapeHtml(item.label)}</a>
   </li>`;
 };
-
-const renderMegaPanel = (item) =>
-  `<section class="ca-mega-panel" data-menu-panel="${escapeHtml(item.key)}" id="ca-panel-${escapeHtml(
-    item.key
-  )}" hidden>
-    <div class="ca-mega-grid" style="--ca-panel-columns: ${item.columns.length};">
-      ${item.columns
-        .map(
-          (column) => `<div class="ca-mega-column">
-            <p class="ca-mega-label">${escapeHtml(column.title)}</p>
-            <div class="ca-mega-links">
-              ${column.links
-                .map(
-                  (link) => `<a class="ca-mega-link" href="${siteUrl(link.href)}">${escapeHtml(
-                    link.label
-                  )}</a>`
-                )
-                .join('')}
-            </div>
-          </div>`
-        )
-        .join('')}
-    </div>
-  </section>`;
 
 const renderMobileAccordion = (item) =>
   `<div class="ca-mobile-group" data-mobile-accordion="${escapeHtml(item.key)}">
@@ -338,11 +330,14 @@ const renderMobileAccordion = (item) =>
   </div>`;
 
 const renderReplicaHeader = (config, locale) => {
-  const megaPanels = config.left.filter((item) => item.kind === 'mega').map(renderMegaPanel).join('');
   const localeLabel =
     config.languages.find((language) => language.code === locale)?.label || locale.toUpperCase();
 
   return `<header class="replica-site-header" role="banner">
+    <a class="ca-floating-logo" href="${siteUrl(config.logo.href)}" aria-label="CoreActive home">
+      <img src="${siteUrl(config.logo.src)}" alt="${escapeHtml(config.logo.alt)}" loading="eager">
+    </a>
+
     <div class="ca-header-shell" data-ca-header-shell>
       <div class="ca-header-desktop-bar">
         <nav class="ca-primary-nav ca-primary-nav--left" aria-label="Primary navigation">
@@ -350,11 +345,6 @@ const renderReplicaHeader = (config, locale) => {
             ${config.left.map(renderDesktopItem).join('')}
           </ul>
         </nav>
-        <div class="ca-logo-slot">
-          <a class="ca-logo-link" href="${siteUrl(config.logo.href)}" aria-label="CoreActive home">
-            <img src="${siteUrl(config.logo.src)}" alt="${escapeHtml(config.logo.alt)}" loading="eager">
-          </a>
-        </div>
         <div class="ca-header-right">
           <nav class="ca-primary-nav ca-primary-nav--right" aria-label="Secondary navigation">
             <ul class="ca-nav-list">
@@ -370,27 +360,21 @@ const renderReplicaHeader = (config, locale) => {
               <a class="ca-auth-link ca-auth-link--signup" href="${siteUrl(
                 config.auth.signUp.href
               )}">${escapeHtml(config.auth.signUp.label)}</a>
+              <a class="ca-auth-link ca-auth-link--shop" href="${siteUrl(
+                config.auth.shop.href
+              )}">${escapeHtml(config.auth.shop.label)}</a>
             </div>
           </div>
         </div>
       </div>
 
       <div class="ca-mobile-bar">
-        <button type="button" class="ca-mobile-toggle" data-mobile-toggle aria-expanded="false" aria-controls="ca-mobile-drawer" aria-label="Open navigation menu">
-          ${svgIcons.menu}
-        </button>
-        <a class="ca-logo-link ca-logo-link--mobile" href="${siteUrl(
-          config.logo.href
-        )}" aria-label="CoreActive home">
-          <img src="${siteUrl(config.logo.src)}" alt="${escapeHtml(config.logo.alt)}" loading="eager">
-        </a>
         <div class="ca-mobile-meta">
           <span data-locale-current>${escapeHtml(localeLabel)}</span>
         </div>
-      </div>
-
-      <div class="ca-mega-container" data-mega-container aria-hidden="true">
-        ${megaPanels}
+        <button type="button" class="ca-mobile-toggle" data-mobile-toggle aria-expanded="false" aria-controls="ca-mobile-drawer" aria-label="Open navigation menu">
+          ${svgIcons.menu}
+        </button>
       </div>
     </div>
 
@@ -431,6 +415,9 @@ const renderReplicaHeader = (config, locale) => {
               <a class="ca-auth-link ca-auth-link--signup" href="${siteUrl(
                 config.auth.signUp.href
               )}" data-mobile-close-link>${escapeHtml(config.auth.signUp.label)}</a>
+              <a class="ca-auth-link ca-auth-link--shop" href="${siteUrl(
+                config.auth.shop.href
+              )}" data-mobile-close-link>${escapeHtml(config.auth.shop.label)}</a>
             </div>
           </div>
         </div>
@@ -460,7 +447,6 @@ const syncLocaleUI = (scope, languages, locale) => {
 
 const bindReplicaHeader = (wrapper, config) => {
   const shell = wrapper.querySelector('[data-ca-header-shell]');
-  const megaContainer = wrapper.querySelector('[data-mega-container]');
   const panels = [...wrapper.querySelectorAll('[data-menu-panel]')];
   const triggers = [...wrapper.querySelectorAll('[data-menu-trigger]')];
   const mobileDrawer = wrapper.querySelector('[data-mobile-drawer]');
@@ -478,14 +464,13 @@ const bindReplicaHeader = (wrapper, config) => {
   const setDesktopMenu = (key) => {
     activeMenu = key;
 
-    if (!(shell instanceof HTMLElement) || !(megaContainer instanceof HTMLElement)) {
+    if (!(shell instanceof HTMLElement)) {
       return;
     }
 
     const isOpen = Boolean(key) && desktopQuery.matches;
 
     shell.classList.toggle('has-open-menu', isOpen);
-    megaContainer.setAttribute('aria-hidden', String(!isOpen));
 
     if (isOpen && key) {
       shell.dataset.openMenu = key;
