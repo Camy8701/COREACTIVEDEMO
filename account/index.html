@@ -1,83 +1,69 @@
-<!DOCTYPE html><html lang="en"><head>
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="dark">
-    <title>Account | BALLINFIT Replica</title>
+    <meta name="theme-color" content="#060606">
+    <link rel="shortcut icon" href="../assets/brand/coreactive-sports-logo-favicon.png" type="image/png">
+    <title>Account | CoreActive</title>
     <link rel="stylesheet" href="../assets/site.css">
     <script src="../assets/standalone-shim.js"></script>
-    <script defer="" src="../assets/site.js"></script>
+    <script defer src="../assets/site.js"></script>
   </head>
-  <body class="replica-auth-page" data-auth-default="login" style="--replica-auth-image:url('../assets/origin/ballinfit/cdn/shop/files/JFB-08328_1--6bd9bd45.jpg')">
-    <main class="replica-auth-layout" data-auth-page="">
-      <section class="replica-auth-media">
-        <a class="replica-auth-brand" href="../index.html">
-          <img src="../assets/brand/coreactive-sports-logo.avif" alt="COREACTIVE SPORTS">
-          <span>Coreactive Access</span>
-        </a>
+  <body class="ca-page" data-auth-default="login">
+    <div data-header-wrapper></div>
+    <main class="ca-main">
+      <section class="ca-hero">
+        <div class="ca-hero-media">
+          <img src="../assets/media/coreactive/coreactive-cardio.png" alt="CoreActive member access" loading="eager">
+        </div>
+        <div class="ca-hero-overlay"></div>
+        <div class="ca-hero-inner">
+          <div class="ca-hero-grid">
+            <div class="ca-hero-copy">
+              <span class="ca-kicker">Member Access</span>
+              <h1 class="ca-title ca-title--compact">Return To Training.</h1>
+              <p class="ca-lead">Log back in to manage memberships, future schedules, and the member access flow once Supabase is connected.</p>
+              <div class="ca-actions">
+                <a class="ca-btn ca-btn--primary" href="../pages/memberships/index.html">View memberships</a>
+                <a class="ca-btn ca-btn--ghost" href="../pages/schedule/index.html">View schedule</a>
+              </div>
+              <div class="ca-hero-note">
+                <span>7-day introduction</span>
+                <strong>Structured start. Coach-led progression.</strong>
+              </div>
+            </div>
 
-        <div class="replica-auth-story">
-          <span class="replica-auth-kicker">Member Portal</span>
-          <h1>Return to training.</h1>
-          <p>
-            Log back in to manage memberships, class credits, bookings, and future progress tracking. This front-end is ready for a Supabase auth layer without changing the visual flow later.
-          </p>
+            <aside class="ca-form-shell ca-auth-hero-box" data-auth-page>
+              <span class="ca-panel-label">Sign in</span>
+              <h2>CoreActive Login</h2>
+              <p>Use the local login shell now and connect real authentication later without changing the page design.</p>
 
-          <div class="replica-auth-proof">
-            <div>
-              <strong>1</strong>
-              <span>shared auth shell for login and sign up</span>
-            </div>
-            <div>
-              <strong>Local</strong>
-              <span>front-end only until Supabase is connected</span>
-            </div>
-            <div>
-              <strong>Ready</strong>
-              <span>for memberships, schedules, and profile data</span>
-            </div>
+              <form class="ca-form" data-auth-form="login" data-auth-panel="login">
+                <div class="ca-field">
+                  <label for="account-email">Email</label>
+                  <input id="account-email" name="email" type="email" placeholder="you@coreactive.co.uk" autocomplete="email" required>
+                </div>
+                <div class="ca-field">
+                  <label for="account-password">Password</label>
+                  <input id="account-password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+                </div>
+                <label class="ca-check">
+                  <input name="remember_me" type="checkbox" value="yes">
+                  <span>Remember this device</span>
+                </label>
+                <button class="ca-btn ca-btn--primary" type="submit">Sign In</button>
+                <div class="replica-auth-status" data-auth-status aria-live="polite"></div>
+                <div class="ca-inline-links">
+                  <a href="../pages/contact/index.html">Forgot login?</a>
+                  <a href="../join/index.html">Create an account</a>
+                </div>
+              </form>
+            </aside>
           </div>
         </div>
       </section>
-
-      <section class="replica-auth-panel">
-        <div class="replica-auth-card replica-auth-card--login">
-          <img class="replica-auth-card-logo" src="../assets/brand/coreactive-sports-logo.avif" alt="COREACTIVE SPORTS">
-          <p class="replica-auth-mini">Member Login</p>
-
-          <form class="replica-auth-form" data-auth-form="login">
-            <div class="replica-auth-field">
-              <label for="login-email">Email</label>
-              <input id="login-email" name="email" type="email" placeholder="you@ballinfit.com" autocomplete="email" required="">
-            </div>
-
-            <div class="replica-auth-field">
-              <div class="replica-auth-label-row">
-                <label for="login-password">Password</label>
-                <a class="replica-auth-link--subtle" href="../pages/contact/index.html">Forgot login?</a>
-              </div>
-              <div class="replica-auth-password">
-                <input id="login-password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required="">
-                <button type="button" data-toggle-password="login-password">Show</button>
-              </div>
-            </div>
-
-            <div class="replica-auth-meta">
-              <label class="replica-auth-check">
-                <input name="remember_me" type="checkbox" value="yes">
-                <span>Remember me</span>
-              </label>
-            </div>
-
-            <button class="replica-auth-submit replica-auth-submit--login" type="submit">Login</button>
-            <div class="replica-auth-status" data-auth-status="" aria-live="polite"></div>
-
-            <p class="replica-auth-footnote replica-auth-footnote--center">
-              New here? <a class="replica-auth-link" href="../join/index.html">Create an account</a>
-            </p>
-          </form>
-        </div>
-      </section>
     </main>
-  
-
-</body></html>
+    <div data-ca-footer></div>
+  </body>
+</html>

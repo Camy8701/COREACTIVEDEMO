@@ -74,6 +74,10 @@ def hero_image(prefix: str, kicker: str, title: str, lead: str, image: str, prim
                   <a class="ca-btn ca-btn--primary" href="{primary_href}">{primary_label}</a>
                   {secondary}
                 </div>
+                <div class="ca-hero-note">
+                  <span>7-day introduction</span>
+                  <strong>Structured start. Coach-led progression.</strong>
+                </div>
               </div>
               {side_html}
             </div>
@@ -105,6 +109,10 @@ def hero_video(prefix: str, kicker: str, title: str, lead: str, video: str, post
                 <div class="ca-actions">
                   <a class="ca-btn ca-btn--primary" href="{primary_href}">{primary_label}</a>
                   {secondary}
+                </div>
+                <div class="ca-hero-note">
+                  <span>7-day introduction</span>
+                  <strong>Structured start. Coach-led progression.</strong>
                 </div>
               </div>
               {side_html}

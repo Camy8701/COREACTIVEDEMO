@@ -2468,3 +2468,366 @@ body#join-the-ballinfit-family .bf-btn {
     display: block;
   }
 }
+
+/* CoreActive page refresh: full-screen media, cleaner sections, original-style buttons */
+:root {
+  --ca-page-line-strong: rgba(255, 255, 255, 0.14);
+  --ca-page-hero-shadow: inset 0 -120px 120px rgba(0, 0, 0, 0.2);
+}
+
+body.ca-page {
+  background: #050505;
+}
+
+body.ca-page::before {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 140px 140px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 62%);
+}
+
+.ca-main {
+  padding: 0 0 40px;
+}
+
+.ca-hero {
+  width: 100%;
+  margin: 0 0 22px;
+  min-height: 100vh;
+  border: 0;
+  border-radius: 0;
+  box-shadow: var(--ca-page-hero-shadow);
+}
+
+.ca-hero-inner {
+  min-height: 100vh;
+  padding: 104px 0 176px;
+}
+
+.ca-hero-grid {
+  width: min(calc(100% - 48px), 1280px);
+  margin: auto;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 26px;
+}
+
+.ca-hero-copy {
+  padding-bottom: clamp(18px, 4vw, 64px);
+}
+
+.ca-hero-overlay {
+  background:
+    linear-gradient(104deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.28) 44%, rgba(0, 0, 0, 0.76) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.28) 100%);
+}
+
+.ca-kicker,
+.ca-panel-label,
+.ca-footer-label,
+.ca-mini-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+}
+
+.ca-kicker::before,
+.ca-panel-label::before,
+.ca-mini-label::before {
+  width: 28px;
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.ca-title {
+  margin: 14px 0 10px;
+  font-size: clamp(2.8rem, 6.6vw, 6rem);
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+}
+
+.ca-title--compact {
+  font-size: clamp(2.4rem, 5.4vw, 4.8rem);
+}
+
+.ca-lead {
+  max-width: 46rem;
+  font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+  line-height: 1.55;
+}
+
+.ca-actions {
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.ca-btn {
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  border-color: var(--ca-page-line-strong);
+}
+
+.ca-btn--primary {
+  background: #f1ede8;
+  border-color: #f1ede8;
+  color: #080808;
+}
+
+.ca-btn--primary:hover,
+.ca-btn--primary:focus-visible {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.ca-btn--ghost {
+  background: rgba(10, 10, 10, 0.58);
+  color: #f7f2ed;
+}
+
+.ca-btn--ghost:hover,
+.ca-btn--ghost:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ca-hero-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.ca-hero-note span,
+.ca-hero-note strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.ca-hero-note span::before,
+.ca-hero-note strong::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.ca-section {
+  width: 100%;
+  margin: 0;
+  padding: 0 0 18px;
+}
+
+.ca-section-shell {
+  width: min(calc(100% - 48px), 1240px);
+  margin: 0 auto;
+  padding: 8px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ca-section-shell--soft {
+  background: transparent;
+}
+
+.ca-section-heading,
+.ca-panel-title,
+.ca-footer-wordmark {
+  font-size: clamp(1.15rem, 2.4vw, 1.85rem);
+  letter-spacing: -0.045em;
+}
+
+.ca-section-copy,
+.ca-band-copy p,
+.ca-panel-copy,
+.ca-copy,
+.ca-hours-slot span,
+.ca-list span,
+.ca-schedule-slot span,
+.ca-detail span,
+.ca-footer-hour span,
+.ca-footer-tagline,
+.ca-footer-copy {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.ca-hours-card,
+.ca-panel,
+.ca-form-shell,
+.ca-stat-card,
+.ca-schedule-column {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background: rgba(10, 10, 10, 0.68);
+  backdrop-filter: blur(16px);
+  box-shadow: none;
+}
+
+.ca-hours-card {
+  align-self: end;
+  padding: 24px;
+  margin-bottom: 38px;
+}
+
+.ca-grid {
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.ca-panel {
+  padding: 20px;
+}
+
+.ca-detail {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ca-band {
+  padding: 22px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background: rgba(9, 9, 9, 0.66);
+  backdrop-filter: blur(14px);
+}
+
+.ca-form-shell {
+  padding: 20px;
+}
+
+.ca-auth-hero-box {
+  padding: 22px;
+}
+
+.ca-auth-hero-box h2 {
+  margin: 8px 0 10px;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.ca-auth-hero-box p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
+}
+
+.ca-auth-hero-box .ca-form {
+  margin-top: 18px;
+}
+
+.ca-tab-row {
+  border-radius: 0;
+  padding: 4px;
+}
+
+.ca-tab-row button {
+  min-height: 40px;
+  border-radius: 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+}
+
+.ca-field input,
+.ca-field select,
+.ca-field textarea {
+  min-height: 48px;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.ca-mobile-sticky-cta a {
+  border-radius: 0;
+  background: #f1ede8;
+  color: #050505;
+  box-shadow: none;
+}
+
+.ca-site-footer {
+  padding: 8px 0 40px;
+}
+
+.ca-footer-shell {
+  width: min(calc(100% - 48px), 1240px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background: rgba(8, 8, 8, 0.86);
+  box-shadow: none;
+}
+
+body#join-the-ballinfit-family .bf-card {
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+body#join-the-ballinfit-family .bf-btn {
+  border-radius: 0;
+}
+
+.ca-home-trust-card {
+  border-radius: 18px;
+  background: rgba(10, 10, 10, 0.66);
+}
+
+@media (max-width: 1100px) {
+  .ca-hero-grid {
+    width: min(calc(100% - 40px), 1280px);
+    grid-template-columns: 1fr;
+  }
+
+  .ca-hours-card {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 720px) {
+  .ca-main {
+    padding: 0 0 88px;
+  }
+
+  .ca-hero {
+    min-height: 100svh;
+    margin-bottom: 16px;
+  }
+
+  .ca-hero-inner {
+    min-height: 100svh;
+    padding: 100px 0 72px;
+  }
+
+  .ca-hero-grid,
+  .ca-section-shell,
+  .ca-footer-shell {
+    width: min(calc(100% - 24px), 1240px);
+  }
+
+  .ca-title {
+    font-size: clamp(2.35rem, 11vw, 4rem);
+  }
+
+  .ca-actions {
+    gap: 8px;
+  }
+
+  .ca-btn {
+    width: auto;
+    min-width: 138px;
+  }
+
+  .ca-hours-card {
+    max-width: none;
+  }
+
+  .ca-band {
+    padding: 18px;
+  }
+}
