@@ -472,6 +472,14 @@ const buildFooterConfig = () => ({
     lines: ['Performance Training', 'United Kingdom'],
     cta: { label: 'Contact The Team', href: 'pages/contact/index.html' },
   },
+  online: {
+    title: 'CoreActive Online',
+    links: [
+      { label: 'Access', href: 'join/index.html' },
+      { label: 'Shop', href: 'collections/frontpage/index.html' },
+      { label: 'Join CoreActive', href: 'join/index.html' },
+    ],
+  },
   hours: [
     { label: 'Mon - Fri', value: '7.00AM - 10.00PM' },
     { label: 'Sat - Sun', value: '9.00AM - 5.00PM' },
@@ -519,6 +527,17 @@ const renderReplicaFooter = (config) => `
                     <strong>${escapeHtml(entry.value)}</strong>
                   </div>
                 `
+              )
+              .join('')}
+          </div>
+        </div>
+        <div class="ca-footer-column">
+          <span class="ca-footer-label">${escapeHtml(config.online.title)}</span>
+          <div class="ca-footer-links ca-footer-links--footer-utility">
+            ${config.online.links
+              .map(
+                (link) =>
+                  `<a href="${siteUrl(link.href)}">${escapeHtml(link.label)}</a>`
               )
               .join('')}
           </div>
