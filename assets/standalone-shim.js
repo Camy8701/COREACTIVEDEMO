@@ -1,13 +1,16 @@
 (function () {
-  if (window.__ballinfitStandaloneShim) {
+  if (window.__coreactiveStandaloneShim || window.__ballinfitStandaloneShim) {
     return;
   }
 
+  window.__coreactiveStandaloneShim = true;
   window.__ballinfitStandaloneShim = true;
 
   const NativeXHR = window.XMLHttpRequest;
-  const storageKey = 'ballinfit-replica-cart';
-  const noteKey = 'ballinfit-replica-cart-note';
+  const storageKey = 'coreactive-replica-cart';
+  const legacyStorageKey = 'ballinfit-replica-cart';
+  const noteKey = 'coreactive-replica-cart-note';
+  const legacyNoteKey = 'ballinfit-replica-cart-note';
   const routeRoots = new Set(['pages', 'collections', 'products', 'account', 'cart', 'checkout', 'join']);
 
   const escapeHtml = (value) =>
@@ -70,13 +73,14 @@
       window.theme.routes.predictive_search_url = joinBase(basePath, 'search/suggest');
     }
 
+    window.__coreactiveSiteBase = basePath;
     window.__ballinfitSiteBase = basePath;
     return basePath;
   };
 
   const readStoredItems = () => {
     try {
-      return JSON.parse(localStorage.getItem(storageKey) || '[]');
+      return JSON.parse(localStorage.getItem(storageKey) || localStorage.getItem(legacyStorageKey) || '[]');
     } catch {
       return [];
     }
@@ -86,14 +90,14 @@
     localStorage.setItem(storageKey, JSON.stringify(items));
   };
 
-  const readCartNote = () => localStorage.getItem(noteKey) || '';
+  const readCartNote = () => localStorage.getItem(noteKey) || localStorage.getItem(legacyNoteKey) || '';
   const writeCartNote = (value) => localStorage.setItem(noteKey, value);
 
   const pageMeta = () => {
     const title =
       document.querySelector('h1')?.textContent?.trim() ||
       document.title.replace(/\s*[|–-].*$/, '').trim() ||
-      'BALLINFIT item';
+      'COREACTIVE item';
     const image =
       document.querySelector('[data-product-single-media-wrapper] img[src]')?.getAttribute('src') ||
       document.querySelector('.product__media img[src]')?.getAttribute('src') ||
@@ -158,7 +162,7 @@
       variant_title: item.variant_title || '',
       product_has_only_default_variant: true,
       requires_shipping: false,
-      vendor: 'BALLINFIT',
+      vendor: 'COREACTIVE',
       discounts: [],
       properties: null,
     };
@@ -179,7 +183,7 @@
     const totalPrice = items.reduce((sum, item) => sum + Number(item.line_price || 0), 0);
 
     return {
-      token: 'ballinfit-standalone',
+      token: 'coreactive-standalone',
       note: readCartNote(),
       attributes: {},
       currency: currencyCode(),
@@ -596,7 +600,7 @@
 
   normalizeRoutes();
 
-  window.__ballinfitCartApi = {
+  const cartApi = {
     addItem,
     buildCart,
     notifyCartChange,
@@ -605,4 +609,6 @@
     updateItemQuantity,
     writeItems,
   };
+  window.__coreactiveCartApi = cartApi;
+  window.__ballinfitCartApi = cartApi;
 })();

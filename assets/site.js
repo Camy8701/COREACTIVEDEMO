@@ -1,5 +1,5 @@
-const fallbackCartKey = 'ballinfit-replica-cart';
-const authEmailKey = 'ballinfit-auth-email';
+const fallbackCartKey = 'coreactive-replica-cart';
+const authEmailKey = 'coreactive-auth-email';
 const localeStorageKey = 'coreactive-locale';
 
 const escapeHtml = (value = '') =>
@@ -48,6 +48,35 @@ const normalizePath = (href) => {
 
 const currentPath = normalizePath(window.location.href);
 
+const replaceLegacyText = (value = '') =>
+  String(value)
+    .replace(/B\.\s*ALL\.\s*IN\./gi, 'COREACTIVE')
+    .replace(/Ballin Fit/gi, 'CoreActive')
+    .replace(/BallinFit/gi, 'CoreActive')
+    .replace(/Ballinfit/gi, 'CoreActive')
+    .replace(/Ballin group classes/gi, 'UrbanFit')
+    .replace(/Group class memberships/gi, 'Memberships')
+    .replace(/\bBALLINFIT\b/g, 'COREACTIVE')
+    .replace(/\bballinfit\b/g, 'coreactive')
+    .replace(/\bHYROX\b/g, 'PulseLab')
+    .replace(/\bhyrox\b/g, 'pulselab')
+    .replace(/first 30 days free/gi, 'first 7 days free')
+    .replace(/30 days free/gi, '7 days free');
+
+const legacyLinkMap = [
+  { match: /\/pages\/hyrox\/?$/i, href: 'pages/pulselab/index.html' },
+  { match: /\/pages\/community\/?$/i, href: 'pages/about/index.html' },
+  { match: /\/pages\/ballin-fitness-memberships\/?$/i, href: 'pages/memberships/index.html' },
+  { match: /\/pages\/group-class-memberships\/?$/i, href: 'pages/memberships/index.html' },
+  { match: /\/pages\/memberships-v2\/?$/i, href: 'pages/memberships/index.html' },
+  { match: /\/pages\/free-trial\/?$/i, href: 'pages/memberships/index.html' },
+  { match: /\/pages\/get-credits\/?$/i, href: 'pages/memberships/index.html' },
+  { match: /\/pages\/meet-the-trainers\/?$/i, href: 'pages/about/index.html' },
+  { match: /\/pages\/rookie\/?$/i, href: 'pages/classes/index.html' },
+  { match: /\/pages\/promo\/?$/i, href: 'pages/memberships/index.html' },
+  { match: /\/products\/ballinfit-camo-running-set\/?$/i, href: 'pages/memberships/index.html' },
+];
+
 const svgIcons = {
   chevron: `<svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4.25 6 8l4-3.75" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"></path></svg>`,
   menu: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7.5h16M4 12h16M4 16.5h16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path></svg>`,
@@ -74,23 +103,23 @@ const buildHeaderConfig = () => ({
         {
           title: 'Programs',
           links: [
-            { label: 'UrbanFit Men', href: 'pages/classes/index.html' },
-            { label: 'UrbanFit Women', href: 'pages/classes/index.html' },
+            { label: 'UrbanFit Men', href: 'pages/urbanfit-men/index.html' },
+            { label: 'UrbanFit Women', href: 'pages/urbanfit-women/index.html' },
             { label: 'UrbanFit Kids', href: 'pages/kids/index.html' },
           ],
         },
         {
           title: 'Experience',
           links: [
-            { label: 'Training Philosophy', href: 'pages/classes/index.html' },
-            { label: 'Class Types', href: 'pages/classes/index.html' },
-            { label: 'Coaching Style', href: 'pages/meet-the-trainers/index.html' },
+            { label: 'Training Philosophy', href: 'pages/classes/index.html#philosophy' },
+            { label: 'Class Types', href: 'pages/classes/index.html#programs' },
+            { label: 'Coaching Style', href: 'pages/about/index.html#approach' },
           ],
         },
         {
           title: 'Access',
           links: [
-            { label: 'Membership Options', href: 'pages/group-class-memberships/index.html' },
+            { label: 'Membership Options', href: 'pages/memberships/index.html#urbanfit-memberships' },
             { label: 'Schedule', href: 'pages/schedule/index.html' },
             { label: 'Join UrbanFit', href: 'join/index.html' },
           ],
@@ -104,11 +133,11 @@ const buildHeaderConfig = () => ({
         },
       ],
       mobileLinks: [
-        { label: 'UrbanFit Men', href: 'pages/classes/index.html' },
-        { label: 'UrbanFit Women', href: 'pages/classes/index.html' },
+        { label: 'UrbanFit Men', href: 'pages/urbanfit-men/index.html' },
+        { label: 'UrbanFit Women', href: 'pages/urbanfit-women/index.html' },
         { label: 'UrbanFit Kids', href: 'pages/kids/index.html' },
-        { label: 'Training Philosophy', href: 'pages/classes/index.html' },
-        { label: 'Class Types', href: 'pages/classes/index.html' },
+        { label: 'Training Philosophy', href: 'pages/classes/index.html#philosophy' },
+        { label: 'Class Types', href: 'pages/classes/index.html#programs' },
         { label: 'Join UrbanFit', href: 'join/index.html' },
       ],
     },
@@ -116,37 +145,37 @@ const buildHeaderConfig = () => ({
       key: 'pulselab',
       label: 'PulseLab',
       kind: 'mega',
-      href: 'pages/hyrox/index.html',
+      href: 'pages/pulselab/index.html',
       columns: [
         {
           title: 'PulseLab',
           links: [
-            { label: 'Overview', href: 'pages/hyrox/index.html' },
-            { label: 'Training Method', href: 'pages/hyrox/index.html' },
+            { label: 'Overview', href: 'pages/pulselab/index.html' },
+            { label: 'Training Method', href: 'pages/pulselab/index.html' },
           ],
         },
         {
           title: 'Performance',
           links: [
-            { label: 'Who It Is For', href: 'pages/personal-training/index.html' },
-            { label: 'Benefits', href: 'pages/hyrox/index.html' },
-            { label: 'Results Focus', href: 'pages/personal-training/index.html' },
+            { label: 'Who It Is For', href: 'pages/pulselab/index.html#who-its-for' },
+            { label: 'Benefits', href: 'pages/pulselab/index.html' },
+            { label: 'Results Focus', href: 'pages/pulselab/index.html#benefits' },
           ],
         },
         {
           title: 'Access',
           links: [
-            { label: 'Membership Options', href: 'pages/memberships-v2/index.html' },
+            { label: 'Membership Options', href: 'pages/memberships/index.html#pulselab-memberships' },
             { label: 'Schedule', href: 'pages/schedule/index.html' },
             { label: 'Join PulseLab', href: 'join/index.html' },
           ],
         },
       ],
       mobileLinks: [
-        { label: 'Overview', href: 'pages/hyrox/index.html' },
-        { label: 'Training Method', href: 'pages/hyrox/index.html' },
-        { label: 'Who It Is For', href: 'pages/personal-training/index.html' },
-        { label: 'Membership Options', href: 'pages/memberships-v2/index.html' },
+        { label: 'Overview', href: 'pages/pulselab/index.html' },
+        { label: 'Training Method', href: 'pages/pulselab/index.html' },
+        { label: 'Who It Is For', href: 'pages/pulselab/index.html#who-its-for' },
+        { label: 'Membership Options', href: 'pages/memberships/index.html#pulselab-memberships' },
         { label: 'Join PulseLab', href: 'join/index.html' },
       ],
     },
@@ -159,16 +188,16 @@ const buildHeaderConfig = () => ({
         {
           title: 'Options',
           links: [
-            { label: 'UrbanFit Memberships', href: 'pages/group-class-memberships/index.html' },
-            { label: 'PulseLab Memberships', href: 'pages/ballin-fitness-memberships/index.html' },
-            { label: 'Credits', href: 'pages/get-credits/index.html' },
+            { label: 'UrbanFit Memberships', href: 'pages/memberships/index.html#urbanfit-memberships' },
+            { label: 'PulseLab Memberships', href: 'pages/memberships/index.html#pulselab-memberships' },
+            { label: 'Credits', href: 'pages/memberships/index.html#credits' },
           ],
         },
         {
           title: 'Information',
           links: [
-            { label: 'Pricing', href: 'pages/memberships/index.html' },
-            { label: 'How Membership Works', href: 'pages/memberships-v2/index.html' },
+            { label: 'Pricing', href: 'pages/memberships/index.html#plans' },
+            { label: 'How Membership Works', href: 'pages/memberships/index.html#how-it-works' },
             { label: 'Terms', href: 'policies/terms-of-service/index.html' },
           ],
         },
@@ -182,10 +211,10 @@ const buildHeaderConfig = () => ({
         },
       ],
       mobileLinks: [
-        { label: 'UrbanFit Memberships', href: 'pages/group-class-memberships/index.html' },
-        { label: 'PulseLab Memberships', href: 'pages/ballin-fitness-memberships/index.html' },
-        { label: 'Credits', href: 'pages/get-credits/index.html' },
-        { label: 'Pricing', href: 'pages/memberships/index.html' },
+        { label: 'UrbanFit Memberships', href: 'pages/memberships/index.html#urbanfit-memberships' },
+        { label: 'PulseLab Memberships', href: 'pages/memberships/index.html#pulselab-memberships' },
+        { label: 'Credits', href: 'pages/memberships/index.html#credits' },
+        { label: 'Pricing', href: 'pages/memberships/index.html#plans' },
         { label: 'Join Online', href: 'join/index.html' },
       ],
     },
@@ -201,7 +230,7 @@ const buildHeaderConfig = () => ({
       key: 'about',
       label: 'About',
       kind: 'link',
-      href: 'pages/community/index.html',
+      href: 'pages/about/index.html',
     },
     {
       key: 'contact',
@@ -213,11 +242,11 @@ const buildHeaderConfig = () => ({
   auth: {
     signIn: { label: 'Sign In', href: 'account/index.html' },
     signUp: { label: 'Sign Up', href: 'join/index.html' },
-    shop: { label: 'Shop', href: 'collections/frontpage/index.html' },
+    shop: { label: 'Shop', href: 'pages/memberships/index.html' },
   },
   mobileDirectLinks: [
     { label: 'Schedule', href: 'pages/schedule/index.html' },
-    { label: 'About', href: 'pages/community/index.html' },
+    { label: 'About', href: 'pages/about/index.html' },
     { label: 'Contact', href: 'pages/contact/index.html' },
   ],
 });
@@ -431,6 +460,70 @@ const renderReplicaHeader = (config, locale) => {
     </div>
   </header>`;
 };
+
+const buildFooterConfig = () => ({
+  brand: 'COREACTIVE',
+  tagline: 'Structured training for real results across every level.',
+  links: [
+    { label: 'UrbanFit', href: 'pages/classes/index.html' },
+    { label: 'PulseLab', href: 'pages/pulselab/index.html' },
+    { label: 'Memberships', href: 'pages/memberships/index.html' },
+    { label: 'Schedule', href: 'pages/schedule/index.html' },
+    { label: 'About', href: 'pages/about/index.html' },
+    { label: 'Contact', href: 'pages/contact/index.html' },
+  ],
+  hours: [
+    { label: 'Mon - Fri', value: '7.00AM - 10.00PM' },
+    { label: 'Sat - Sun', value: '9.00AM - 5.00PM' },
+  ],
+});
+
+const renderReplicaFooter = (config) => `
+  <footer class="ca-site-footer" role="contentinfo">
+    <div class="ca-footer-shell">
+      <div class="ca-footer-brand">
+        <a class="ca-footer-logo" href="${siteUrl('index.html')}" aria-label="CoreActive home">
+          <img src="${siteUrl('assets/brand/coreactive-sports-logo.avif')}" alt="CoreActive Sports" loading="lazy">
+        </a>
+        <p class="ca-footer-wordmark">${escapeHtml(config.brand)}</p>
+        <p class="ca-footer-tagline">${escapeHtml(config.tagline)}</p>
+      </div>
+      <div class="ca-footer-columns">
+        <div class="ca-footer-column">
+          <span class="ca-footer-label">Navigate</span>
+          <div class="ca-footer-links">
+            ${config.links
+              .map(
+                (link) =>
+                  `<a href="${siteUrl(link.href)}">${escapeHtml(link.label)}</a>`
+              )
+              .join('')}
+          </div>
+        </div>
+        <div class="ca-footer-column">
+          <span class="ca-footer-label">Opening Hours</span>
+          <div class="ca-footer-hours">
+            ${config.hours
+              .map(
+                (entry) => `
+                  <div class="ca-footer-hour">
+                    <span>${escapeHtml(entry.label)}</span>
+                    <strong>${escapeHtml(entry.value)}</strong>
+                  </div>
+                `
+              )
+              .join('')}
+          </div>
+        </div>
+        <div class="ca-footer-column">
+          <span class="ca-footer-label">Support</span>
+          <p class="ca-footer-copy">Sign up locally now and connect Supabase, payments, and multilingual content next.</p>
+          <a class="ca-footer-cta" href="${siteUrl('join/index.html')}">Join CoreActive</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+`;
 
 const syncLocaleUI = (scope, languages, locale) => {
   const localeLabel =
@@ -678,7 +771,404 @@ const initReplicaHeader = () => {
   bindReplicaHeader(wrapper, config);
 };
 
-const cartApi = window.__ballinfitCartApi || null;
+const initReplicaFooter = () => {
+  document.querySelectorAll('[data-ca-footer]').forEach((mount) => {
+    if (!(mount instanceof HTMLElement) || mount.dataset.replicaFooter === 'ready') {
+      return;
+    }
+
+    mount.dataset.replicaFooter = 'ready';
+    mount.innerHTML = renderReplicaFooter(buildFooterConfig());
+  });
+};
+
+const normalizeLegacyFooters = () => {
+  document.querySelectorAll('.footer').forEach((footer) => {
+    footer.querySelectorAll('[data-footer-logo] img').forEach((image) => {
+      image.setAttribute('src', siteUrl('assets/brand/coreactive-sports-logo.avif'));
+      image.setAttribute('srcset', `${siteUrl('assets/brand/coreactive-sports-logo.avif')} 2x`);
+      image.setAttribute('alt', 'COREACTIVE SPORTS');
+    });
+
+    footer.querySelectorAll('.footer__block').forEach((block) => {
+      const titleNode = block.querySelector('.footer__title');
+      const title = (titleNode?.textContent || '').trim().toLowerCase();
+
+      if (title.includes('download our app')) {
+        block.remove();
+        return;
+      }
+
+      if (title.includes('where to find')) {
+        const body = block.querySelector('.rte');
+        if (body) {
+          body.innerHTML = `<p><strong>COREACTIVE</strong><br>UK-based performance training<br><a href="${siteUrl(
+            'pages/contact/index.html'
+          )}"><em>Contact the team</em></a></p>`;
+        }
+      }
+
+      if (title.includes('opening hours')) {
+        const body = block.querySelector('.rte');
+        if (body) {
+          body.innerHTML =
+            '<p><strong>MON - FRI <br></strong>7.00AM - 10.00PM<br><br><strong>SAT - SUN<br></strong>9.00AM - 5.00PM</p>';
+        }
+      }
+    });
+  });
+
+  document.querySelectorAll('.subfooter__item--copyright .subfooter__copyright').forEach((node, index) => {
+    if (!(node instanceof HTMLElement)) {
+      return;
+    }
+
+    if (index === 0) {
+      node.innerHTML = `© <a href="${siteUrl('index.html')}">COREACTIVE</a> ${new Date().getFullYear()}`;
+      return;
+    }
+
+    if (node.querySelector('a[href*="shopify.com"]')) {
+      node.remove();
+    }
+  });
+};
+
+const rewriteLegacyLinks = () => {
+  document.querySelectorAll('a[href]').forEach((anchor) => {
+    const rawHref = anchor.getAttribute('href') || '';
+    if (!rawHref || rawHref.startsWith('#') || /^(mailto|tel|javascript):/i.test(rawHref)) {
+      return;
+    }
+
+    let absolute;
+    try {
+      absolute = new URL(rawHref, window.location.href);
+    } catch {
+      return;
+    }
+
+    const pathname = normalizePath(absolute.toString());
+    const entry = legacyLinkMap.find((candidate) => candidate.match.test(pathname));
+    if (!entry) {
+      return;
+    }
+
+    const nextHref = siteUrl(entry.href);
+    anchor.setAttribute('href', absolute.hash ? `${nextHref}${absolute.hash}` : nextHref);
+
+    const title = anchor.getAttribute('title');
+    if (title && /\b(ballin|hyrox|B\. ALL\. IN\.)/i.test(title)) {
+      anchor.setAttribute('title', replaceLegacyText(title));
+    }
+  });
+};
+
+const scrubLegacyBranding = () => {
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const parent = node.parentElement;
+      if (!parent) {
+        return NodeFilter.FILTER_REJECT;
+      }
+
+      if (parent.closest('script, style, noscript, title')) {
+        return NodeFilter.FILTER_REJECT;
+      }
+
+      return /\b(ballin|hyrox|30 days free|B\. ALL\. IN\.)/i.test(node.nodeValue || '')
+        ? NodeFilter.FILTER_ACCEPT
+        : NodeFilter.FILTER_REJECT;
+    },
+  });
+
+  const textNodes = [];
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  textNodes.forEach((node) => {
+    node.nodeValue = replaceLegacyText(node.nodeValue || '');
+  });
+
+  document.title = replaceLegacyText(document.title);
+  if (document.body?.dataset.siteReplica) {
+    document.body.dataset.siteReplica = 'coreactive';
+  }
+
+  document
+    .querySelectorAll('meta[property], meta[name]')
+    .forEach((meta) => {
+      const content = meta.getAttribute('content');
+      if (content && /\b(ballin|hyrox|30 days free|B\. ALL\. IN\.)/i.test(content)) {
+        meta.setAttribute('content', replaceLegacyText(content));
+      }
+    });
+
+  document
+    .querySelectorAll('[placeholder], [title], [aria-label], img[alt]')
+    .forEach((element) => {
+      ['placeholder', 'title', 'aria-label', 'alt'].forEach((attribute) => {
+        const value = element.getAttribute(attribute);
+        if (value && /\b(ballin|hyrox|30 days free|B\. ALL\. IN\.)/i.test(value)) {
+          element.setAttribute(attribute, replaceLegacyText(value));
+        }
+      });
+    });
+};
+
+const applyHeroText = (section, { title, description, kicker, buttonLabel, buttonHref }) => {
+  if (!(section instanceof HTMLElement)) {
+    return;
+  }
+
+  const titleNode = section.querySelector('.hero__title');
+  const descriptionNode = section.querySelector('.hero__description');
+  const kickerNode = section.querySelector('.hero__kicker');
+  const button = section.querySelector('.hero__cta__wrapper a');
+
+  if (titleNode && title) {
+    titleNode.innerHTML = `<p>${title}</p>`;
+  }
+
+  if (descriptionNode && description) {
+    descriptionNode.innerHTML = description;
+  }
+
+  if (kickerNode && kicker) {
+    kickerNode.innerHTML = `<p>${kicker}</p>`;
+  }
+
+  if (button && buttonLabel && buttonHref) {
+    button.textContent = buttonLabel;
+    button.setAttribute('href', siteUrl(buttonHref));
+  }
+};
+
+const applyHeroImage = (section, assetPath) => {
+  if (!(section instanceof HTMLElement) || !assetPath) {
+    return;
+  }
+
+  const assetUrl = siteUrl(assetPath);
+  section.querySelectorAll('source').forEach((source) => {
+    source.setAttribute('srcset', assetUrl);
+  });
+
+  const image = section.querySelector('img');
+  if (image) {
+    image.setAttribute('src', assetUrl);
+    image.setAttribute('srcset', assetUrl);
+    image.setAttribute('sizes', '100vw');
+  }
+};
+
+const enhanceHomePage = () => {
+  const isHome =
+    currentPath === normalizePath(siteUrl('index.html')) || currentPath === normalizePath(siteUrl(''));
+  if (!isHome) {
+    return;
+  }
+
+  document.querySelectorAll('.popup').forEach((popup) => popup.remove());
+
+  const videoSection = document.querySelector('#MainContent [data-section-type="video"]');
+  if (videoSection) {
+    const video = videoSection.querySelector('video');
+    const source = video?.querySelector('source');
+    const fallbackImage = video?.querySelector('img');
+    const videoWrapper = videoSection.querySelector('.video-autoplay-wrapper');
+
+    if (video) {
+      video.setAttribute('poster', siteUrl('assets/media/coreactive/man-poster.jpg'));
+    }
+    if (source) {
+      source.setAttribute('src', siteUrl('assets/media/coreactive/man.mp4'));
+    }
+    if (fallbackImage) {
+      fallbackImage.setAttribute('src', siteUrl('assets/media/coreactive/man-poster.jpg'));
+    }
+    if (videoWrapper instanceof HTMLElement) {
+      videoWrapper.style.backgroundImage = `url("${siteUrl('assets/media/coreactive/man-poster.jpg')}")`;
+      videoWrapper.style.backgroundSize = 'cover';
+      videoWrapper.style.backgroundPosition = 'center';
+    }
+    if (video) {
+      video.load();
+      const attemptPlay = video.play();
+      if (attemptPlay && typeof attemptPlay.catch === 'function') {
+        attemptPlay.catch(() => {});
+      }
+    }
+
+    const titleNode = videoSection.querySelector('.hero__title');
+    const descriptionNode = videoSection.querySelector('.hero__description');
+    const buttons = [...videoSection.querySelectorAll('.hero__cta__wrapper a')];
+
+    if (titleNode) {
+      titleNode.innerHTML = '<p>Train with purpose.<br>Perform at your peak.</p>';
+    }
+    if (descriptionNode) {
+      descriptionNode.innerHTML = '<p>Structured training for real results across every level.</p>';
+    }
+    if (buttons[0]) {
+      buttons[0].textContent = 'Start Training';
+      buttons[0].setAttribute('href', siteUrl('pages/classes/index.html'));
+    }
+    if (buttons[1]) {
+      buttons[1].textContent = 'Join Now';
+      buttons[1].setAttribute('href', siteUrl('join/index.html'));
+    }
+  }
+
+  const richTextSections = [...document.querySelectorAll('#MainContent [data-section-type="rich-text"]')];
+  if (richTextSections[0]) {
+    const heading = richTextSections[0].querySelector('.standard__heading');
+    const body = richTextSections[0].querySelector('.rte');
+    if (heading) heading.innerHTML = '<p>7 days free</p>';
+    if (body) {
+      body.innerHTML =
+        '<p>Start with a 7-day introduction to structured training and find the CoreActive program that fits your level.</p><p>UrbanFit brings the group energy. PulseLab sharpens performance.</p>';
+    }
+  }
+
+  const faqSection = document.querySelector('#MainContent [data-section-type="page-faq"]');
+  if (faqSection) {
+    const entries = [
+      {
+        title: 'Which program should I start with?',
+        body: 'UrbanFit is for high-energy, coach-led group training. PulseLab is for members who want a more performance-focused environment and tighter progression.',
+      },
+      {
+        title: 'What happens in my first week?',
+        body: 'You get a clear starting point, structured sessions, and guidance on which class flow fits your current level and schedule.',
+      },
+      {
+        title: 'How do I join CoreActive?',
+        body: 'Choose your route, start the local join flow, and connect payments or Supabase later without changing the front-end experience.',
+      },
+    ];
+
+    faqSection.querySelectorAll('.accordion__wrapper').forEach((entry, index) => {
+      const config = entries[index];
+      if (!config) {
+        entry.remove();
+        return;
+      }
+
+      const title = entry.querySelector('.accordion__title, label.accordion__title');
+      const body = entry.querySelector('.accordion__body');
+      if (title) title.textContent = config.title;
+      if (body) body.innerHTML = `<span></span><p>${config.body}</p>`;
+    });
+  }
+
+  const grid = document.querySelector('#MainContent .bf-grid');
+  if (grid) {
+    grid.innerHTML = `
+      <div class="bf-card">
+        <h3>UrbanFit Men</h3>
+        <p>Strength, conditioning, and performance with coach-led group structure.</p>
+        <div class="bf-price"><strong>Find your program</strong></div>
+        <a href="${siteUrl('pages/urbanfit-men/index.html')}" class="bf-btn">Explore</a>
+      </div>
+      <div class="bf-card">
+        <h3>UrbanFit Women</h3>
+        <p>Toning, strength, and confidence in a supportive training environment.</p>
+        <div class="bf-price"><strong>Find your program</strong></div>
+        <a href="${siteUrl('pages/urbanfit-women/index.html')}" class="bf-btn">Explore</a>
+      </div>
+      <div class="bf-card">
+        <h3>UrbanFit Kids</h3>
+        <p>Movement, coordination, and fun with structure that keeps younger members engaged.</p>
+        <div class="bf-price"><strong>Find your program</strong></div>
+        <a href="${siteUrl('pages/kids/index.html')}" class="bf-btn">Explore</a>
+      </div>
+      <div class="bf-card">
+        <h3>PulseLab</h3>
+        <p>Precision programming for members chasing sharper progression and accountability.</p>
+        <div class="bf-price"><strong>Plans available</strong></div>
+        <a href="${siteUrl('pages/pulselab/index.html')}" class="bf-btn">Explore</a>
+      </div>
+    `;
+  }
+
+  if (richTextSections[1]) {
+    const heading = richTextSections[1].querySelector('.standard__heading');
+    const body = richTextSections[1].querySelector('.rte');
+    const button = richTextSections[1].querySelector('.hero__cta__wrapper a');
+    if (heading) heading.innerHTML = '<p>COREACTIVE</p>';
+    if (body) {
+      body.innerHTML =
+        '<p>CoreActive is the umbrella performance fitness brand built around structured training, professional coaching, and measurable progression.</p><p>Choose UrbanFit for high-energy group training or PulseLab for a more focused performance environment.</p>';
+    }
+    if (button) {
+      button.textContent = 'Find your program';
+      button.setAttribute('href', siteUrl('pages/classes/index.html'));
+    }
+  }
+
+  const heroes = [...document.querySelectorAll('#MainContent [data-section-type="hero"]')];
+  applyHeroText(heroes[0], {
+    title: 'PulseLab',
+    description: '<p>Train with precision. Perform at a higher level.</p>',
+    buttonLabel: 'Explore PulseLab',
+    buttonHref: 'pages/pulselab/index.html',
+  });
+  applyHeroImage(heroes[0], 'assets/media/coreactive/pulselab-rower.png');
+
+  applyHeroText(heroes[1], {
+    kicker: 'CoreActive programs',
+    title: 'UrbanFit',
+    description:
+      '<p><strong>Functional, high-energy group training for all ages and levels.</strong></p><p>Structured sessions, real coaching, and a community-driven training floor.</p>',
+    buttonLabel: 'Explore UrbanFit',
+    buttonHref: 'pages/classes/index.html',
+  });
+  applyHeroImage(heroes[1], 'assets/media/coreactive/coreactive-cardio.png');
+
+  applyHeroText(heroes[2], {
+    kicker: 'Memberships',
+    title: 'Join CoreActive',
+    description:
+      '<p>UrbanFit, PulseLab, and flexible credits are all available through one clear join flow.</p><p><strong>Plans available. Start training now.</strong></p>',
+    buttonLabel: 'Join Now',
+    buttonHref: 'join/index.html',
+  });
+  applyHeroImage(heroes[2], 'assets/media/coreactive/woman-poster.jpg');
+
+  applyHeroText(heroes[3], {
+    kicker: 'Why CoreActive',
+    title: 'Built for real results',
+    description:
+      '<p><strong>Structured sessions designed for progression.</strong></p><p>Coaches that guide every step, a supportive training environment, and programming built for real results, not trends.</p>',
+    buttonLabel: 'View Schedule',
+    buttonHref: 'pages/schedule/index.html',
+  });
+  applyHeroImage(heroes[3], 'assets/media/coreactive/urbanfit-kids.png');
+
+  const logoSection = document.querySelector('#MainContent [data-section-type="logos"] .logo-bar__wrapper');
+  if (logoSection) {
+    logoSection.innerHTML = `
+      <div class="ca-home-trust-strip">
+        <div class="ca-home-trust-card">
+          <span>Structured programs</span>
+          <strong>Clear progression from session one</strong>
+        </div>
+        <div class="ca-home-trust-card">
+          <span>Coach-led training</span>
+          <strong>Guidance at every level</strong>
+        </div>
+        <div class="ca-home-trust-card">
+          <span>Trusted by members</span>
+          <strong>Across the UK performance community</strong>
+        </div>
+      </div>
+    `;
+  }
+};
+
+const cartApi = window.__coreactiveCartApi || window.__ballinfitCartApi || null;
 
 const money = (value) =>
   new Intl.NumberFormat('nl-NL', {
@@ -757,7 +1247,7 @@ const productMeta = () => {
   const title =
     document.querySelector('h1')?.textContent?.trim() ||
     document.title.replace(/\s*[|–-].*$/, '').trim() ||
-    'BALLINFIT item';
+    'COREACTIVE item';
   const image =
     document.querySelector('[data-product-single-media-wrapper] img[src]')?.getAttribute('src') ||
     document.querySelector('.product__media img[src]')?.getAttribute('src') ||
@@ -872,7 +1362,7 @@ const renderCartPage = () => {
       .map((item) => {
         const unitPrice = Number(item.price_cents ?? Math.round(Number(item.price || 0) * 100));
         const linePrice = (Number(item.quantity || 0) * unitPrice) / 100;
-        return `<div class="product-item"><img src="${item.image || ''}" alt=""><div><strong>${item.title || 'BALLINFIT item'}</strong><div>Quantity: ${Number(item.quantity || 0)}</div></div><div class="replica-price">${money(linePrice)}</div></div>`;
+        return `<div class="product-item"><img src="${item.image || ''}" alt=""><div><strong>${item.title || 'COREACTIVE item'}</strong><div>Quantity: ${Number(item.quantity || 0)}</div></div><div class="replica-price">${money(linePrice)}</div></div>`;
       })
       .join('') +
     `<div class="replica-cart-total"><span>Total</span><span>${money(total / 100)}</span></div>`;
@@ -975,6 +1465,11 @@ const initAuthPage = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   initReplicaHeader();
+  initReplicaFooter();
+  enhanceHomePage();
+  normalizeLegacyFooters();
+  rewriteLegacyLinks();
+  scrubLegacyBranding();
   renderCartCount();
   bindProductForms();
   bindShareInputs();
