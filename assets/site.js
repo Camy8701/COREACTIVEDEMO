@@ -964,6 +964,91 @@ const applyHeroImage = (section, assetPath) => {
   }
 };
 
+const renderHomeCarouselSlide = (slide) => `
+  <article class="ca-home-carousel-slide${slide.kind === 'text' ? ' ca-home-carousel-slide--text' : ''}" aria-label="${escapeHtml(
+    slide.ariaLabel || slide.title
+  )}">
+    <div class="ca-home-carousel-media"${slide.image ? ` style="background-image: url('${siteUrl(slide.image)}')"` : ''}></div>
+    <div class="ca-home-carousel-overlay"></div>
+    <div class="ca-home-carousel-shell">
+      <div class="ca-home-carousel-copy${slide.align === 'left' ? ' ca-home-carousel-copy--left' : ''}">
+        ${slide.kicker ? `<span class="ca-home-carousel-kicker">${escapeHtml(slide.kicker)}</span>` : ''}
+        <h2 class="ca-home-carousel-title">${slide.titleHtml || escapeHtml(slide.title || '')}</h2>
+        ${slide.descriptionHtml ? `<div class="ca-home-carousel-description">${slide.descriptionHtml}</div>` : ''}
+        ${
+          slide.cta
+            ? `<a class="btn btn--white btn--long ca-home-carousel-btn" href="${siteUrl(slide.cta.href)}">${escapeHtml(
+                slide.cta.label
+              )}</a>`
+            : ''
+        }
+      </div>
+    </div>
+  </article>
+`;
+
+const initHomeCarousel = (carousel) => {
+  if (!(carousel instanceof HTMLElement) || carousel.dataset.caCarouselReady === 'true') {
+    return;
+  }
+
+  const track = carousel.querySelector('[data-ca-home-carousel-track]');
+  if (!(track instanceof HTMLElement)) {
+    return;
+  }
+
+  const totalSlides = Number(track.getAttribute('data-ca-slide-count') || '0');
+  if (totalSlides < 2) {
+    return;
+  }
+
+  let index = 1;
+  let timerId = 0;
+
+  const setPosition = (immediate = false) => {
+    track.style.transition = immediate ? 'none' : 'transform 1100ms cubic-bezier(0.22, 1, 0.36, 1)';
+    track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
+  };
+
+  const stop = () => {
+    if (timerId) {
+      window.clearInterval(timerId);
+      timerId = 0;
+    }
+  };
+
+  const start = () => {
+    stop();
+    timerId = window.setInterval(() => {
+      index += 1;
+      setPosition();
+    }, 7000);
+  };
+
+  track.addEventListener('transitionend', () => {
+    if (index === totalSlides + 1) {
+      index = 1;
+      setPosition(true);
+    }
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stop();
+      return;
+    }
+
+    start();
+  });
+
+  carousel.addEventListener('mouseenter', stop);
+  carousel.addEventListener('mouseleave', start);
+
+  carousel.dataset.caCarouselReady = 'true';
+  setPosition(true);
+  start();
+};
+
 const enhanceHomePage = () => {
   const isHome =
     currentPath === normalizePath(siteUrl('index.html')) || currentPath === normalizePath(siteUrl(''));
@@ -1147,6 +1232,87 @@ const enhanceHomePage = () => {
     buttonHref: 'pages/schedule/index.html',
   });
   applyHeroImage(heroes[3], 'assets/media/coreactive/urbanfit-kids.png');
+
+  const sliderSourceSections = [richTextSections[0], richTextSections[1], heroes[0], heroes[1], heroes[2], heroes[3]].filter(
+    (section) => section instanceof HTMLElement
+  );
+  const videoSectionRoot = videoSection?.closest('.shopify-section');
+  const existingCarousel = document.querySelector('[data-ca-home-carousel]');
+
+  if (videoSectionRoot instanceof HTMLElement && !existingCarousel && sliderSourceSections.length) {
+    const slides = [
+      {
+        kind: 'text',
+        align: 'left',
+        kicker: 'Start Here',
+        title: '7 Days Free',
+        descriptionHtml:
+          '<p>Start with a 7-day introduction to structured training and find the CoreActive program that fits your level.</p><p>UrbanFit brings the group energy. PulseLab sharpens performance.</p>',
+        cta: { label: 'Start Training', href: 'join/index.html' },
+      },
+      {
+        kind: 'text',
+        align: 'left',
+        kicker: 'CoreActive',
+        title: 'CoreActive',
+        descriptionHtml:
+          '<p>CoreActive is the umbrella performance fitness brand built around structured training, professional coaching, and measurable progression.</p><p>Choose UrbanFit for high-energy group training or PulseLab for a more focused performance environment.</p>',
+        cta: { label: 'Find your program', href: 'pages/classes/index.html' },
+      },
+      {
+        kind: 'image',
+        kicker: 'PulseLab',
+        title: 'PulseLab',
+        descriptionHtml: '<p>Train with precision. Perform at a higher level.</p>',
+        image: 'assets/media/coreactive/pulselab-rower.png',
+        cta: { label: 'Explore PulseLab', href: 'pages/pulselab/index.html' },
+      },
+      {
+        kind: 'image',
+        kicker: 'CoreActive Programs',
+        title: 'UrbanFit',
+        descriptionHtml:
+          '<p><strong>Functional, high-energy group training for all ages and levels.</strong></p><p>Structured sessions, real coaching, and a community-driven training floor.</p>',
+        image: 'assets/media/coreactive/coreactive-cardio.png',
+        cta: { label: 'Explore UrbanFit', href: 'pages/classes/index.html' },
+      },
+      {
+        kind: 'image',
+        kicker: 'Memberships',
+        titleHtml: 'Join<br>CoreActive',
+        ariaLabel: 'Join CoreActive',
+        descriptionHtml:
+          '<p>UrbanFit, PulseLab, and flexible credits are all available through one clear join flow.</p><p><strong>Plans available. Start training now.</strong></p>',
+        image: 'assets/media/coreactive/woman-poster.jpg',
+        cta: { label: 'Join Now', href: 'join/index.html' },
+      },
+      {
+        kind: 'image',
+        kicker: 'Why CoreActive',
+        title: 'Built for real results',
+        descriptionHtml:
+          '<p><strong>Structured sessions designed for progression.</strong></p><p>Coaches that guide every step, a supportive training environment, and programming built for real results, not trends.</p>',
+        image: 'assets/media/coreactive/urbanfit-kids.png',
+        cta: { label: 'View Schedule', href: 'pages/schedule/index.html' },
+      },
+    ];
+
+    const clonedSlides = [slides[slides.length - 1], ...slides, slides[0]];
+    const carousel = document.createElement('section');
+    carousel.className = 'ca-home-carousel';
+    carousel.setAttribute('data-ca-home-carousel', '');
+    carousel.innerHTML = `
+      <div class="ca-home-carousel-track" data-ca-home-carousel-track data-ca-slide-count="${slides.length}">
+        ${clonedSlides.map((slide) => renderHomeCarouselSlide(slide)).join('')}
+      </div>
+    `;
+
+    videoSectionRoot.insertAdjacentElement('afterend', carousel);
+    sliderSourceSections.forEach((section) => {
+      section.hidden = true;
+    });
+    initHomeCarousel(carousel);
+  }
 
   const logoSection = document.querySelector('#MainContent [data-section-type="logos"] .logo-bar__wrapper');
   if (logoSection) {
