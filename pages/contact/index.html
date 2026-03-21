@@ -10,82 +10,55 @@
             <script src="../../assets/standalone-shim.js"></script>
             <script defer src="../../assets/site.js"></script>
           </head>
-          <body class="ca-page" >
+          <body class="ca-page ca-page--contact" >
             <div data-header-wrapper></div>
             <main class="ca-main">
-              <section class="ca-hero">
-  <div class="ca-hero-media">
-    <img src="../../assets/media/coreactive/coreactive-cardio.png" alt="Talk to the CoreActive team" loading="eager">
-  </div>
-  <div class="ca-hero-overlay"></div>
-  <div class="ca-hero-inner">
-    <div class="ca-hero-grid">
-      <div class="ca-hero-copy">
-        <span class="ca-kicker">Contact</span>
-        <h1 class="ca-title">Talk to the CoreActive team</h1>
-        <p class="ca-lead">Use the local contact flow now and wire up WhatsApp, email routing, or Supabase submissions later without changing the front-end.</p>
-        <div class="ca-actions">
-          <a class="ca-btn ca-btn--primary" href="../../join/index.html">Join now</a>
-          <a class="ca-btn ca-btn--ghost" href="../schedule/index.html">View schedule</a>
-        </div>
-        <div class="ca-hero-note">
-          <span>7-day introduction</span>
-          <strong>Structured start. Coach-led progression.</strong>
-        </div>
-      </div>
+                      <section class="ca-hero">
+          <div class="ca-hero-media">
+            <img src="../../assets/media/coreactive/coreactive-cardio.png" alt="Talk to the CoreActive team" loading="eager">
+          </div>
+          <div class="ca-hero-overlay"></div>
+          <div class="ca-hero-inner">
+            <div class="ca-hero-grid">
+              <div class="ca-hero-copy">
+                <span class="ca-kicker">Contact</span>
+                <h1 class="ca-title">Talk to the CoreActive team</h1>
+                <p class="ca-lead">Ask about UrbanFit, PulseLab, memberships, or the best route into training. Keep the front-end local today and wire real submissions later.</p>
+                <div class="ca-actions">
+                  <a class="ca-btn ca-btn--primary" href="../schedule/index.html">View schedule</a>
+                  <a class="ca-btn ca-btn--ghost" href="../../join/index.html">Join now</a>
+                </div>
+                <div class="ca-hero-note">
+                  <span>7-day introduction</span>
+                  <strong>Structured start. Coach-led progression.</strong>
+                </div>
+              </div>
+              <aside class="ca-contact-card">
+  <span class="ca-contact-intro">After submitting, we&apos;ll reach out to schedule your start.</span>
+  <form class="ca-form ca-contact-form" data-local-form="true">
+    <div class="ca-field">
+      <input id="contact-name" name="name" type="text" placeholder="Full Name" aria-label="Full Name" required>
+    </div>
+    <div class="ca-field">
+      <input id="contact-email" name="email" type="email" placeholder="Email" aria-label="Email" required>
+    </div>
+    <div class="ca-field">
+      <input id="contact-phone" name="phone" type="tel" placeholder="Phone" aria-label="Phone">
+    </div>
+    <div class="ca-field">
+      <input id="contact-age" name="age" type="text" placeholder="Age" aria-label="Age">
+    </div>
+    <div class="ca-field">
+      <textarea id="contact-message" name="message" placeholder="Message" aria-label="Message"></textarea>
+    </div>
+    <button class="ca-btn ca-btn--primary" type="submit">Send</button>
+    <p class="ca-contact-note">This standalone page is ready for real hCaptcha, WhatsApp routing, or Supabase submissions later.</p>
+  </form>
+</aside>
 
-    </div>
-  </div>
-</section>
-<section class="ca-section">
-  <div class="ca-section-shell ca-section-shell--soft">
-    <div class="ca-access-grid">
-      <div class="ca-panel">
-        <span class="ca-panel-label">Support options</span>
-        <h2 class="ca-panel-title">Reach us your way</h2>
-        <ul class="ca-panel-list">
-          <li>Ask about UrbanFit, PulseLab, memberships, or the weekly schedule.</li>
-          <li>Use this local page as the front-end shell for WhatsApp and form routing later.</li>
-          <li>Training access and onboarding details can be shared after sign-up.</li>
-        </ul>
-        <div class="ca-actions">
-          <a class="ca-btn ca-btn--primary" href="../../join/index.html">Start training</a>
-          <a class="ca-btn ca-btn--ghost" href="../memberships/index.html">Memberships</a>
-        </div>
-      </div>
-      <div class="ca-form-shell">
-        <span class="ca-panel-label">Contact form</span>
-        <form class="ca-form" data-local-form="true">
-          <div class="ca-form-grid">
-            <div class="ca-field">
-              <label for="contact-name">Name</label>
-              <input id="contact-name" name="name" type="text" placeholder="Your name" required>
-            </div>
-            <div class="ca-field">
-              <label for="contact-email">Email</label>
-              <input id="contact-email" name="email" type="email" placeholder="you@coreactive.co.uk" required>
             </div>
           </div>
-          <div class="ca-field">
-            <label for="contact-topic">Topic</label>
-            <select id="contact-topic" name="topic" required>
-              <option value="">Choose a topic</option>
-              <option>UrbanFit</option>
-              <option>PulseLab</option>
-              <option>Memberships</option>
-              <option>Schedule</option>
-            </select>
-          </div>
-          <div class="ca-field">
-            <label for="contact-message">Message</label>
-            <textarea id="contact-message" name="message" placeholder="Tell us what you need"></textarea>
-          </div>
-          <button class="ca-btn ca-btn--primary" type="submit">Send message</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+        </section>
 
             </main>
             <div data-ca-footer></div>

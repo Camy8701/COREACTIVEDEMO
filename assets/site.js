@@ -205,8 +205,8 @@ const buildHeaderConfig = () => ({
           title: 'Join',
           links: [
             { label: 'Join Online', href: 'join/index.html' },
-            { label: 'Sign Up', href: 'join/index.html' },
-            { label: 'Member Access', href: 'account/index.html' },
+            { label: 'Member Access', href: 'join/index.html' },
+            { label: 'Contact', href: 'pages/contact/index.html' },
           ],
         },
       ],
@@ -240,8 +240,7 @@ const buildHeaderConfig = () => ({
     },
   ],
   auth: {
-    signIn: { label: 'Sign In', href: 'account/index.html' },
-    signUp: { label: 'Sign Up', href: 'join/index.html' },
+    access: { label: 'Access', href: 'join/index.html' },
     shop: { label: 'Shop', href: 'collections/frontpage/index.html' },
   },
   mobileDirectLinks: [
@@ -384,12 +383,9 @@ const renderReplicaHeader = (config, locale) => {
           <div class="ca-header-utility">
             ${renderLanguageToggle(config.languages, locale, 'desktop')}
             <div class="ca-auth-links">
-              <a class="ca-auth-link" href="${siteUrl(
-                config.auth.signIn.href
-              )}">${escapeHtml(config.auth.signIn.label)}</a>
-              <a class="ca-auth-link ca-auth-link--signup" href="${siteUrl(
-                config.auth.signUp.href
-              )}">${escapeHtml(config.auth.signUp.label)}</a>
+              <a class="ca-auth-link ca-auth-link--access" href="${siteUrl(
+                config.auth.access.href
+              )}">${escapeHtml(config.auth.access.label)}</a>
               <a class="ca-auth-link ca-auth-link--shop" href="${siteUrl(
                 config.auth.shop.href
               )}">${escapeHtml(config.auth.shop.label)}</a>
@@ -444,12 +440,9 @@ const renderReplicaHeader = (config, locale) => {
               ${renderLanguageToggle(config.languages, locale, 'mobile')}
             </div>
             <div class="ca-mobile-auth">
-              <a class="ca-auth-link" href="${siteUrl(
-                config.auth.signIn.href
-              )}" data-mobile-close-link>${escapeHtml(config.auth.signIn.label)}</a>
-              <a class="ca-auth-link ca-auth-link--signup" href="${siteUrl(
-                config.auth.signUp.href
-              )}" data-mobile-close-link>${escapeHtml(config.auth.signUp.label)}</a>
+              <a class="ca-auth-link ca-auth-link--access" href="${siteUrl(
+                config.auth.access.href
+              )}" data-mobile-close-link>${escapeHtml(config.auth.access.label)}</a>
               <a class="ca-auth-link ca-auth-link--shop" href="${siteUrl(
                 config.auth.shop.href
               )}" data-mobile-close-link>${escapeHtml(config.auth.shop.label)}</a>
@@ -463,16 +456,22 @@ const renderReplicaHeader = (config, locale) => {
 
 const buildFooterConfig = () => ({
   brand: 'COREACTIVE',
-  tagline: 'Structured training for real results across every level.',
   links: [
+    { label: 'Memberships', href: 'pages/memberships/index.html' },
     { label: 'UrbanFit', href: 'pages/classes/index.html' },
     { label: 'PulseLab', href: 'pages/pulselab/index.html' },
-    { label: 'Memberships', href: 'pages/memberships/index.html' },
-    { label: 'Shop', href: 'collections/frontpage/index.html' },
     { label: 'Schedule', href: 'pages/schedule/index.html' },
+    { label: 'Shop', href: 'collections/frontpage/index.html' },
     { label: 'About', href: 'pages/about/index.html' },
     { label: 'Contact', href: 'pages/contact/index.html' },
+    { label: 'FAQ', href: 'pages/faq/index.html' },
   ],
+  location: {
+    title: 'Where To Find Us',
+    name: 'CoreActive',
+    lines: ['Performance Training', 'United Kingdom'],
+    cta: { label: 'Contact The Team', href: 'pages/contact/index.html' },
+  },
   hours: [
     { label: 'Mon - Fri', value: '7.00AM - 10.00PM' },
     { label: 'Sat - Sun', value: '9.00AM - 5.00PM' },
@@ -482,23 +481,31 @@ const buildFooterConfig = () => ({
 const renderReplicaFooter = (config) => `
   <footer class="ca-site-footer" role="contentinfo">
     <div class="ca-footer-shell">
-      <div class="ca-footer-brand">
-        <a class="ca-footer-logo" href="${siteUrl('index.html')}" aria-label="CoreActive home">
-          <img src="${siteUrl('assets/brand/coreactive-sports-logo.avif')}" alt="CoreActive Sports" loading="lazy">
-        </a>
-        <p class="ca-footer-wordmark">${escapeHtml(config.brand)}</p>
-        <p class="ca-footer-tagline">${escapeHtml(config.tagline)}</p>
-      </div>
       <div class="ca-footer-columns">
+        <div class="ca-footer-column ca-footer-column--brand">
+          <a class="ca-footer-logo" href="${siteUrl('index.html')}" aria-label="CoreActive home">
+            <img src="${siteUrl('assets/brand/coreactive-sports-logo.avif')}" alt="CoreActive Sports" loading="lazy">
+          </a>
+          <div class="ca-footer-navigation">
+            <span class="ca-footer-label">Go To</span>
+            <div class="ca-footer-links">
+              ${config.links
+                .map(
+                  (link) =>
+                    `<a href="${siteUrl(link.href)}">${escapeHtml(link.label)}</a>`
+                )
+                .join('')}
+            </div>
+          </div>
+        </div>
         <div class="ca-footer-column">
-          <span class="ca-footer-label">Navigate</span>
-          <div class="ca-footer-links">
-            ${config.links
-              .map(
-                (link) =>
-                  `<a href="${siteUrl(link.href)}">${escapeHtml(link.label)}</a>`
-              )
-              .join('')}
+          <span class="ca-footer-label">${escapeHtml(config.location.title)}</span>
+          <div class="ca-footer-location">
+            <strong>${escapeHtml(config.location.name)}</strong>
+            ${config.location.lines.map((line) => `<span>${escapeHtml(line)}</span>`).join('')}
+            <a class="ca-footer-inline-link" href="${siteUrl(
+              config.location.cta.href
+            )}">${escapeHtml(config.location.cta.label)}</a>
           </div>
         </div>
         <div class="ca-footer-column">
@@ -515,11 +522,6 @@ const renderReplicaFooter = (config) => `
               )
               .join('')}
           </div>
-        </div>
-        <div class="ca-footer-column">
-          <span class="ca-footer-label">Support</span>
-          <p class="ca-footer-copy">Sign up locally now and connect Supabase, payments, and multilingual content next.</p>
-          <a class="ca-footer-cta" href="${siteUrl('join/index.html')}">Join CoreActive</a>
         </div>
       </div>
     </div>
@@ -784,55 +786,34 @@ const initReplicaFooter = () => {
 };
 
 const normalizeLegacyFooters = () => {
-  document.querySelectorAll('.footer').forEach((footer) => {
-    footer.querySelectorAll('[data-footer-logo] img').forEach((image) => {
-      image.setAttribute('src', siteUrl('assets/brand/coreactive-sports-logo.avif'));
-      image.setAttribute('srcset', `${siteUrl('assets/brand/coreactive-sports-logo.avif')} 2x`);
-      image.setAttribute('alt', 'COREACTIVE SPORTS');
-    });
+  const footerMarkup = renderReplicaFooter(buildFooterConfig());
+  const legacyFooters = [...document.querySelectorAll('.footer')];
 
-    footer.querySelectorAll('.footer__block').forEach((block) => {
-      const titleNode = block.querySelector('.footer__title');
-      const title = (titleNode?.textContent || '').trim().toLowerCase();
-
-      if (title.includes('download our app')) {
-        block.remove();
+  if (legacyFooters.length) {
+    legacyFooters.forEach((footer, index) => {
+      if (!(footer instanceof HTMLElement)) {
         return;
       }
 
-      if (title.includes('where to find')) {
-        const body = block.querySelector('.rte');
-        if (body) {
-          body.innerHTML = `<p><strong>COREACTIVE</strong><br>UK-based performance training<br><a href="${siteUrl(
-            'pages/contact/index.html'
-          )}"><em>Contact the team</em></a></p>`;
-        }
+      if (index === 0) {
+        footer.outerHTML = footerMarkup;
+        return;
       }
 
-      if (title.includes('opening hours')) {
-        const body = block.querySelector('.rte');
-        if (body) {
-          body.innerHTML =
-            '<p><strong>MON - FRI <br></strong>7.00AM - 10.00PM<br><br><strong>SAT - SUN<br></strong>9.00AM - 5.00PM</p>';
-        }
+      footer.remove();
+    });
+
+    document.querySelectorAll('.subfooter, [id*="__subfooter"], .shopify-section-group-footer-group').forEach((node) => {
+      if (node instanceof HTMLElement && !node.querySelector('.ca-site-footer')) {
+        node.remove();
       }
     });
-  });
+    return;
+  }
 
-  document.querySelectorAll('.subfooter__item--copyright .subfooter__copyright').forEach((node, index) => {
-    if (!(node instanceof HTMLElement)) {
-      return;
-    }
-
-    if (index === 0) {
-      node.innerHTML = `© <a href="${siteUrl('index.html')}">COREACTIVE</a> ${new Date().getFullYear()}`;
-      return;
-    }
-
-    if (node.querySelector('a[href*="shopify.com"]')) {
-      node.remove();
-    }
-  });
+  if (!document.querySelector('.ca-site-footer') && !document.querySelector('[data-ca-footer]')) {
+    document.body.insertAdjacentHTML('beforeend', footerMarkup);
+  }
 };
 
 const rewriteLegacyLinks = () => {

@@ -251,7 +251,7 @@ def build_classes_page() -> str:
             """
         )
     )
-    return page_shell("UrbanFit | CoreActive", 2, main)
+    return page_shell("UrbanFit | CoreActive", 2, main, body_class="ca-page ca-page--minimal")
 
 
 def build_program_page(kind: str, title: str, subtitle: str, video: str = "", poster: str = "", image: str = "", benefits=None, for_text=None, expect_text=None, format_items=None, preview=None) -> str:
@@ -354,7 +354,7 @@ def build_program_page(kind: str, title: str, subtitle: str, video: str = "", po
             """
         )
     )
-    return page_shell(f"{title} | CoreActive", 2, main)
+    return page_shell(f"{title} | CoreActive", 2, main, body_class="ca-page ca-page--minimal")
 
 
 def build_about_page() -> str:
@@ -451,7 +451,7 @@ def build_about_page() -> str:
             """
         )
     )
-    return page_shell("About CoreActive", 2, main)
+    return page_shell("About CoreActive", 2, main, body_class="ca-page ca-page--minimal")
 
 
 def build_pulselab_page() -> str:
@@ -535,7 +535,7 @@ def build_pulselab_page() -> str:
             """
         )
     )
-    return page_shell("PulseLab | CoreActive", 2, main)
+    return page_shell("PulseLab | CoreActive", 2, main, body_class="ca-page ca-page--minimal")
 
 
 def build_schedule_page() -> str:
@@ -607,7 +607,7 @@ def build_schedule_page() -> str:
             """
         )
     )
-    return page_shell("Schedule | CoreActive", 2, main)
+    return page_shell("Schedule | CoreActive", 2, main, body_class="ca-page ca-page--minimal")
 
 
 def build_memberships_page() -> str:
@@ -693,7 +693,7 @@ def build_memberships_page() -> str:
             """
         )
     )
-    return page_shell("Memberships | CoreActive", 2, main)
+    return page_shell("Memberships | CoreActive", 2, main, body_class="ca-page ca-page--minimal")
 
 
 def build_contact_page() -> str:
@@ -703,68 +703,41 @@ def build_contact_page() -> str:
             prefix,
             "Contact",
             "Talk to the CoreActive team",
-            "Use the local contact flow now and wire up WhatsApp, email routing, or Supabase submissions later without changing the front-end.",
+            "Ask about UrbanFit, PulseLab, memberships, or the best route into training. Keep the front-end local today and wire real submissions later.",
             "coreactive-cardio.png",
-            root_href("join/index.html"),
-            "Join now",
             page_href("schedule"),
             "View schedule",
-        )
-        + dedent(
-            f"""\
-            <section class="ca-section">
-              <div class="ca-section-shell ca-section-shell--soft">
-                <div class="ca-access-grid">
-                  <div class="ca-panel">
-                    <span class="ca-panel-label">Support options</span>
-                    <h2 class="ca-panel-title">Reach us your way</h2>
-                    <ul class="ca-panel-list">
-                      <li>Ask about UrbanFit, PulseLab, memberships, or the weekly schedule.</li>
-                      <li>Use this local page as the front-end shell for WhatsApp and form routing later.</li>
-                      <li>Training access and onboarding details can be shared after sign-up.</li>
-                    </ul>
-                    <div class="ca-actions">
-                      <a class="ca-btn ca-btn--primary" href="{root_href('join/index.html')}">Start training</a>
-                      <a class="ca-btn ca-btn--ghost" href="{page_href("memberships")}">Memberships</a>
+            root_href("join/index.html"),
+            "Join now",
+            dedent(
+                """\
+                <aside class="ca-contact-card">
+                  <span class="ca-contact-intro">After submitting, we&apos;ll reach out to schedule your start.</span>
+                  <form class="ca-form ca-contact-form" data-local-form="true">
+                    <div class="ca-field">
+                      <input id="contact-name" name="name" type="text" placeholder="Full Name" aria-label="Full Name" required>
                     </div>
-                  </div>
-                  <div class="ca-form-shell">
-                    <span class="ca-panel-label">Contact form</span>
-                    <form class="ca-form" data-local-form="true">
-                      <div class="ca-form-grid">
-                        <div class="ca-field">
-                          <label for="contact-name">Name</label>
-                          <input id="contact-name" name="name" type="text" placeholder="Your name" required>
-                        </div>
-                        <div class="ca-field">
-                          <label for="contact-email">Email</label>
-                          <input id="contact-email" name="email" type="email" placeholder="you@coreactive.co.uk" required>
-                        </div>
-                      </div>
-                      <div class="ca-field">
-                        <label for="contact-topic">Topic</label>
-                        <select id="contact-topic" name="topic" required>
-                          <option value="">Choose a topic</option>
-                          <option>UrbanFit</option>
-                          <option>PulseLab</option>
-                          <option>Memberships</option>
-                          <option>Schedule</option>
-                        </select>
-                      </div>
-                      <div class="ca-field">
-                        <label for="contact-message">Message</label>
-                        <textarea id="contact-message" name="message" placeholder="Tell us what you need"></textarea>
-                      </div>
-                      <button class="ca-btn ca-btn--primary" type="submit">Send message</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </section>
-            """
+                    <div class="ca-field">
+                      <input id="contact-email" name="email" type="email" placeholder="Email" aria-label="Email" required>
+                    </div>
+                    <div class="ca-field">
+                      <input id="contact-phone" name="phone" type="tel" placeholder="Phone" aria-label="Phone">
+                    </div>
+                    <div class="ca-field">
+                      <input id="contact-age" name="age" type="text" placeholder="Age" aria-label="Age">
+                    </div>
+                    <div class="ca-field">
+                      <textarea id="contact-message" name="message" placeholder="Message" aria-label="Message"></textarea>
+                    </div>
+                    <button class="ca-btn ca-btn--primary" type="submit">Send</button>
+                    <p class="ca-contact-note">This standalone page is ready for real hCaptcha, WhatsApp routing, or Supabase submissions later.</p>
+                  </form>
+                </aside>
+                """
+            ),
         )
     )
-    return page_shell("Contact | CoreActive", 2, main)
+    return page_shell("Contact | CoreActive", 2, main, body_class="ca-page ca-page--contact")
 
 
 def build_join_page() -> str:
@@ -938,7 +911,7 @@ def build_faq_page() -> str:
             """
         )
     )
-    return page_shell("FAQ | CoreActive", 2, main)
+    return page_shell("FAQ | CoreActive", 2, main, body_class="ca-page ca-page--minimal")
 
 
 def build_shop_page() -> str:
