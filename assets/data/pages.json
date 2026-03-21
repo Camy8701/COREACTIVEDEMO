@@ -17,7 +17,8 @@
   { "title": "7-Day Introduction", "route": "/pages/free-trial/" },
   { "title": "Memberships", "route": "/pages/memberships-v2/" },
   { "title": "Credits", "route": "/pages/get-credits/" },
-  { "title": "Frontpage Collection", "route": "/collections/frontpage/" },
+  { "title": "CoreActive Shop", "route": "/collections/frontpage/" },
   { "title": "Memberships Collection", "route": "/collections/memberships/" },
-  { "title": "CoreActive Shop", "route": "/products/ballinfit-camo-running-set/" }
+  { "title": "CoreActive Resistance Band Set", "route": "/products/coreactive-resistance-band-set/" },
+  { "title": "CoreActive Resistance Band Set", "route": "/products/ballinfit-camo-running-set/" }
 ]

@@ -74,7 +74,7 @@ const legacyLinkMap = [
   { match: /\/pages\/meet-the-trainers\/?$/i, href: 'pages/about/index.html' },
   { match: /\/pages\/rookie\/?$/i, href: 'pages/classes/index.html' },
   { match: /\/pages\/promo\/?$/i, href: 'pages/memberships/index.html' },
-  { match: /\/products\/ballinfit-camo-running-set\/?$/i, href: 'pages/memberships/index.html' },
+  { match: /\/products\/ballinfit-camo-running-set\/?$/i, href: 'products/coreactive-resistance-band-set/index.html' },
 ];
 
 const svgIcons = {
@@ -242,7 +242,7 @@ const buildHeaderConfig = () => ({
   auth: {
     signIn: { label: 'Sign In', href: 'account/index.html' },
     signUp: { label: 'Sign Up', href: 'join/index.html' },
-    shop: { label: 'Shop', href: 'pages/memberships/index.html' },
+    shop: { label: 'Shop', href: 'collections/frontpage/index.html' },
   },
   mobileDirectLinks: [
     { label: 'Schedule', href: 'pages/schedule/index.html' },
@@ -468,6 +468,7 @@ const buildFooterConfig = () => ({
     { label: 'UrbanFit', href: 'pages/classes/index.html' },
     { label: 'PulseLab', href: 'pages/pulselab/index.html' },
     { label: 'Memberships', href: 'pages/memberships/index.html' },
+    { label: 'Shop', href: 'collections/frontpage/index.html' },
     { label: 'Schedule', href: 'pages/schedule/index.html' },
     { label: 'About', href: 'pages/about/index.html' },
     { label: 'Contact', href: 'pages/contact/index.html' },

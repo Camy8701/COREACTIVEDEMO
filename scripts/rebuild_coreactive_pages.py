@@ -941,6 +941,136 @@ def build_faq_page() -> str:
     return page_shell("FAQ | CoreActive", 2, main)
 
 
+def build_shop_page() -> str:
+    prefix = "../../"
+    product_href = root_href("products/coreactive-resistance-band-set/index.html")
+    main = (
+        hero_image(
+            prefix,
+            "Shop",
+            "CoreActive Shop",
+            "Restore the local shop with gym-ready essentials that match the training identity of the site.",
+            "resistance-band-set.svg",
+            product_href,
+            "Shop now",
+            root_href("pages/schedule/index.html"),
+            "View schedule",
+        )
+        + dedent(
+            f"""\
+            <section class="ca-section">
+              <div class="ca-section-shell">
+                <span class="ca-kicker">Featured product</span>
+                <h2 class="ca-section-heading">Training gear built for warm-ups, activation, and travel sessions</h2>
+                <div class="ca-shop-grid">
+                  <article class="ca-shop-card">
+                    <a class="ca-shop-media" href="{product_href}">
+                      <img src="{prefix}assets/media/coreactive/resistance-band-set.svg" alt="CoreActive Resistance Band Set" loading="lazy">
+                    </a>
+                    <div class="ca-shop-copy">
+                      <span class="ca-panel-label">Portable training</span>
+                      <h3>CoreActive Resistance Band Set</h3>
+                      <p>A lightweight training kit for activation, strength prep, recovery days, and hotel-room sessions.</p>
+                      <span class="ca-price-tag">€ 29,00</span>
+                      <div class="ca-actions">
+                        <a class="ca-btn ca-btn--primary" href="{product_href}">View product</a>
+                        <a class="ca-btn ca-btn--ghost" href="{root_href('join/index.html')}">Join CoreActive</a>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="ca-shop-card">
+                    <div class="ca-shop-copy">
+                      <span class="ca-panel-label">Why this item</span>
+                      <h3>Simple, local, deployable</h3>
+                      <p>The old apparel product has been replaced with a gym-related product that fits the CoreActive brand and works with the existing local cart stub.</p>
+                      <ul class="ca-panel-list">
+                        <li>Easy to use before strength or conditioning sessions</li>
+                        <li>Compact enough for gym bags and travel</li>
+                        <li>Local product route with local cart flow</li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </section>
+            <div class="ca-mobile-sticky-cta"><a href="{product_href}">Shop now</a></div>
+            """
+        )
+    )
+    return page_shell("Shop | CoreActive", 2, main)
+
+
+def build_product_page() -> str:
+    prefix = "../../"
+    main = (
+        hero_image(
+            prefix,
+            "Gym Essentials",
+            "Resistance Band Set",
+            "A portable training kit for warm-ups, activation, mobility work, and light resistance sessions.",
+            "resistance-band-set.svg",
+            "#buy-now",
+            "Add to cart",
+            root_href("collections/frontpage/index.html"),
+            "Back to shop",
+        )
+        + dedent(
+            f"""\
+            <section class="ca-section" id="buy-now">
+              <div class="ca-section-shell">
+                <span class="ca-kicker">Product details</span>
+                <h2 class="ca-section-heading">CoreActive Resistance Band Set</h2>
+                <div class="ca-product-layout">
+                  <div class="ca-product-gallery">
+                    <img src="{prefix}assets/media/coreactive/resistance-band-set.svg" alt="CoreActive Resistance Band Set" loading="lazy">
+                  </div>
+                  <div class="ca-product-summary">
+                    <span class="ca-panel-label">Gym product</span>
+                    <h3 class="ca-panel-title">Portable strength and activation kit</h3>
+                    <p class="ca-price-tag">€ 29,00</p>
+                    <p class="ca-panel-copy">Use it for activation before lifting, movement prep before classes, home workouts, or light recovery circuits when you are away from the gym.</p>
+                    <ul class="ca-panel-list">
+                      <li>Includes multiple resistance levels for warm-up and accessory work</li>
+                      <li>Good for glutes, shoulders, mobility prep, and travel sessions</li>
+                      <li>Works with the local standalone cart and checkout stub</li>
+                    </ul>
+                    <form class="ca-form ca-product-form" action="../../cart/" data-local-form="true">
+                      <input type="hidden" name="quantity" value="1">
+                      <div class="ca-actions">
+                        <button class="ca-btn ca-btn--primary" type="submit" name="add" value="1">Add to demo cart</button>
+                        <a class="ca-btn ca-btn--ghost" href="{root_href('collections/frontpage/index.html')}">Back to shop</a>
+                      </div>
+                    </form>
+                    <p class="ca-product-note">Local standalone commerce stub: the front-end product and cart flow work now, and a real checkout can be connected later.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="ca-section">
+              <div class="ca-section-shell">
+                <div class="ca-grid ca-grid--3">
+                  <article class="ca-panel">
+                    <h3 class="ca-panel-title">Warm-up ready</h3>
+                    <p class="ca-panel-copy">Ideal before UrbanFit classes, leg sessions, and upper-body activation blocks.</p>
+                  </article>
+                  <article class="ca-panel">
+                    <h3 class="ca-panel-title">Travel friendly</h3>
+                    <p class="ca-panel-copy">Fits easily into a gym bag so members can keep moving outside the main facility.</p>
+                  </article>
+                  <article class="ca-panel">
+                    <h3 class="ca-panel-title">Gym relevant</h3>
+                    <p class="ca-panel-copy">Replaces the removed apparel product with a more relevant training-focused item.</p>
+                  </article>
+                </div>
+              </div>
+            </section>
+            <div class="ca-mobile-sticky-cta"><a href="#buy-now">Add to cart</a></div>
+            """
+        )
+    )
+    return page_shell("CoreActive Resistance Band Set", 2, main)
+
+
 def main() -> None:
     write("pages/classes/index.html", build_classes_page())
     men = build_program_page(
@@ -1039,6 +1169,11 @@ def main() -> None:
     write("pages/contact/index.html", build_contact_page())
     write("pages/faq/index.html", build_faq_page())
     write("pages/rookie/index.html", build_classes_page())
+    shop = build_shop_page()
+    write("collections/frontpage/index.html", shop)
+    product = build_product_page()
+    write("products/coreactive-resistance-band-set/index.html", product)
+    write("products/ballinfit-camo-running-set/index.html", product)
     write("join/index.html", build_join_page())
 
 
