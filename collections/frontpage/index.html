@@ -15,300 +15,98 @@
     <div data-header-wrapper></div>
     <main class="ca-main ca-shop-main">
 
-      <!-- ═══ FULL-BLEED HERO ═══ -->
+      <!-- ═══ HERO BANNER ═══ -->
       <section class="cas-hero">
         <div class="cas-hero-media">
-          <img src="../../assets/origin/ballinfit/cdn/shop/files/IMG_5031_copy_1bef4105-aafc-4620-8ffc-687466c37b76--54b96396.jpg" alt="CoreActive training gear" loading="eager">
+          <video autoplay muted loop playsinline poster="../../assets/media/coreactive/man-poster.jpg">
+            <source src="../../assets/media/coreactive/man.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="cas-hero-gradient"></div>
         <div class="cas-hero-content">
-          <span class="cas-hero-kicker">New Collection</span>
-          <h1 class="cas-hero-title">Train.<br>Recover.<br>Repeat.</h1>
-          <p class="cas-hero-sub">Performance gear and training essentials built for the CoreActive community.</p>
-          <a class="cas-hero-cta" href="#shop-training">Shop Now</a>
+          <span class="cas-hero-kicker">CoreActive Shop</span>
+          <h1 class="cas-hero-title">Gear Up.<br>Train Hard.</h1>
+          <p class="cas-hero-sub">Training essentials built for the CoreActive community. From warm-ups to recovery.</p>
+          <a class="cas-hero-cta" href="#cas-products">Shop Now</a>
         </div>
       </section>
 
-      <!-- ═══ CATEGORY NAV STRIP ═══ -->
-      <nav class="cas-cat-strip" aria-label="Shop categories">
-        <div class="cas-cat-inner">
-          <a class="cas-cat-pill is-active" href="#shop-training" data-cas-filter="all">All</a>
-          <a class="cas-cat-pill" href="#shop-training" data-cas-filter="training">Training</a>
-          <a class="cas-cat-pill" href="#shop-recovery" data-cas-filter="recovery">Recovery</a>
-          <a class="cas-cat-pill" href="#shop-accessories" data-cas-filter="accessories">Accessories</a>
-          <a class="cas-cat-pill" href="#shop-apparel" data-cas-filter="apparel">Apparel</a>
-        </div>
-      </nav>
-
-      <!-- ═══ FEATURED PRODUCT BANNER ═══ -->
-      <section class="cas-featured" id="shop-featured">
-        <div class="cas-featured-media">
-          <img src="../../assets/media/coreactive/resistance-band-set.svg" alt="CoreActive Resistance Band Set" loading="lazy">
-        </div>
-        <div class="cas-featured-content">
-          <span class="cas-badge">Bestseller</span>
-          <h2 class="cas-featured-title">Resistance Band Set</h2>
-          <p class="cas-featured-desc">A portable training kit for warm-ups, activation, mobility work, and light resistance sessions. Five resistance levels in one compact pouch.</p>
-          <div class="cas-featured-price">
-            <span class="cas-price">€29,00</span>
-          </div>
-          <div class="cas-featured-actions">
-            <a class="cas-btn cas-btn--solid" href="../../products/coreactive-resistance-band-set/index.html">
-              <span>Buy Now</span>
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══ TRAINING ESSENTIALS ROW ═══ -->
-      <section class="cas-row" id="shop-training">
-        <div class="cas-row-header">
+      <!-- ═══ PRODUCTS SECTION ═══ -->
+      <section class="cas-products" id="cas-products">
+        <div class="cas-products-header">
           <div>
-            <span class="cas-row-kicker">Training</span>
-            <h2 class="cas-row-title">Training Essentials</h2>
-          </div>
-          <div class="cas-row-nav">
-            <button class="cas-arrow cas-arrow--prev" data-cas-scroll="prev" aria-label="Previous">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button class="cas-arrow cas-arrow--next" data-cas-scroll="next" aria-label="Next">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
+            <span class="cas-row-kicker">Shop</span>
+            <h2 class="cas-row-title">Our Products</h2>
           </div>
         </div>
-        <div class="cas-track" data-cas-track>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/resistance-band-set.svg" alt="Resistance Band Set" loading="lazy">
-              <span class="cas-card-tag">Bestseller</span>
+
+        <div class="cas-product-grid">
+
+          <!-- Product 1: Resistance Band Set -->
+          <article class="cas-product-card">
+            <a class="cas-product-media" href="../../products/coreactive-resistance-band-set/index.html">
+              <div class="cas-product-img-wrap">
+                <img src="../../assets/media/coreactive/resistance-band-set.svg" alt="CoreActive Resistance Band Set" loading="lazy">
+              </div>
+              <span class="cas-product-tag">Bestseller</span>
             </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Resistance Band Set</a></h3>
-              <span class="cas-card-price">€29,00</span>
+            <div class="cas-product-details">
+              <h3><a href="../../products/coreactive-resistance-band-set/index.html">CoreActive Resistance Band Set</a></h3>
+              <p class="cas-product-desc">Portable training kit for warm-ups, activation, and mobility work. Five resistance levels.</p>
+              <div class="cas-product-bottom">
+                <span class="cas-product-price">€29,00</span>
+                <a class="cas-product-buy" href="../../products/coreactive-resistance-band-set/index.html">
+                  View Product
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                </a>
+              </div>
             </div>
           </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/pulselab-rower.png" alt="PulseLab Jump Rope" loading="lazy">
+
+          <!-- Product 2: CoreActive Running Set -->
+          <article class="cas-product-card">
+            <a class="cas-product-media" href="../../products/coreactive-resistance-band-set/index.html">
+              <div class="cas-product-img-wrap cas-product-img-wrap--dark">
+                <svg class="cas-product-placeholder" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="200" height="200" fill="#141414"/>
+                  <path d="M70 130 L100 70 L130 130" stroke="rgba(255,255,255,0.12)" stroke-width="2" fill="none"/>
+                  <circle cx="100" cy="90" r="20" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="none"/>
+                  <path d="M60 140 H140" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                </svg>
+              </div>
+              <span class="cas-product-tag cas-product-tag--soon">Coming Soon</span>
             </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">PulseLab Speed Rope</a></h3>
-              <span class="cas-card-price">€24,00</span>
+            <div class="cas-product-details">
+              <h3><a href="../../products/coreactive-resistance-band-set/index.html">CoreActive Performance Set</a></h3>
+              <p class="cas-product-desc">Compression top and training shorts designed for UrbanFit and PulseLab sessions.</p>
+              <div class="cas-product-bottom">
+                <span class="cas-product-price">€59,00</span>
+                <span class="cas-product-notify">Notify Me</span>
+              </div>
             </div>
           </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/coreactive-cardio.png" alt="Training Gloves" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Training Gloves</a></h3>
-              <span class="cas-card-price">€19,00</span>
-            </div>
-          </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/urbanfit-kids.png" alt="Gym Towel" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Performance Gym Towel</a></h3>
-              <span class="cas-card-price">€15,00</span>
-            </div>
-          </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/woman-poster.jpg" alt="Wrist Wraps" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Wrist Wraps</a></h3>
-              <span class="cas-card-price">€12,00</span>
-            </div>
-          </article>
+
         </div>
       </section>
 
-      <!-- ═══ RECOVERY ROW ═══ -->
-      <section class="cas-row" id="shop-recovery">
-        <div class="cas-row-header">
-          <div>
-            <span class="cas-row-kicker">Recovery</span>
-            <h2 class="cas-row-title">Recovery &amp; Mobility</h2>
+      <!-- ═══ MEMBERSHIP CTA BANNER ═══ -->
+      <section class="cas-membership-banner">
+        <div class="cas-membership-inner">
+          <div class="cas-membership-copy">
+            <span class="cas-row-kicker">Members get more</span>
+            <h2 class="cas-membership-title">Start with 7 days free</h2>
+            <p>Join CoreActive and get early access to new drops, member-only pricing, and structured training programs.</p>
+            <a class="cas-btn cas-btn--solid" href="../../join/index.html">Start Free Trial</a>
           </div>
-          <div class="cas-row-nav">
-            <button class="cas-arrow cas-arrow--prev" data-cas-scroll="prev" aria-label="Previous">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button class="cas-arrow cas-arrow--next" data-cas-scroll="next" aria-label="Next">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          </div>
-        </div>
-        <div class="cas-track" data-cas-track>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/origin/ballinfit/cdn/shop/files/IMG_1331--9683d638.jpg" alt="Foam Roller" loading="lazy">
-              <span class="cas-card-tag">New</span>
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">High-Density Foam Roller</a></h3>
-              <span class="cas-card-price">€34,00</span>
-            </div>
-          </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/origin/ballinfit/cdn/shop/files/IMG_5031_copy--d9ca7ff8.jpg" alt="Massage Ball Set" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Massage Ball Set</a></h3>
-              <span class="cas-card-price">€18,00</span>
-            </div>
-          </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/man-poster.jpg" alt="Mobility Strap" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Stretching Strap</a></h3>
-              <span class="cas-card-price">€14,00</span>
-            </div>
-          </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/origin/ballinfit/cdn/shop/files/JFB-07824--abc33c5a.jpg" alt="Cold Compress" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Cold Compress Pack</a></h3>
-              <span class="cas-card-price">€22,00</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- ═══ ACCESSORIES ROW ═══ -->
-      <section class="cas-row" id="shop-accessories">
-        <div class="cas-row-header">
-          <div>
-            <span class="cas-row-kicker">Gear</span>
-            <h2 class="cas-row-title">Accessories</h2>
-          </div>
-          <div class="cas-row-nav">
-            <button class="cas-arrow cas-arrow--prev" data-cas-scroll="prev" aria-label="Previous">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button class="cas-arrow cas-arrow--next" data-cas-scroll="next" aria-label="Next">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
+          <div class="cas-membership-visual">
+            <video autoplay muted loop playsinline poster="../../assets/media/coreactive/woman-poster.jpg">
+              <source src="../../assets/media/coreactive/woman.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
-        <div class="cas-track" data-cas-track>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/origin/ballinfit/cdn/shop/files/JFB-07466--e5e65436.jpg" alt="Gym Bag" loading="lazy">
-              <span class="cas-card-tag">Popular</span>
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">CoreActive Gym Bag</a></h3>
-              <span class="cas-card-price">€49,00</span>
-            </div>
-          </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/resistance-band-set.svg" alt="Shaker Bottle" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Shaker Bottle 700ml</a></h3>
-              <span class="cas-card-price">€16,00</span>
-            </div>
-          </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/pulselab-rower.png" alt="Lifting Belt" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Training Belt</a></h3>
-              <span class="cas-card-price">€39,00</span>
-            </div>
-          </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/coreactive-cardio.png" alt="Knee Sleeves" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Knee Sleeves</a></h3>
-              <span class="cas-card-price">€28,00</span>
-            </div>
-          </article>
-          <article class="cas-card">
-            <a class="cas-card-media" href="../../products/coreactive-resistance-band-set/index.html">
-              <img src="../../assets/media/coreactive/urbanfit-kids.png" alt="Chalk Bag" loading="lazy">
-            </a>
-            <div class="cas-card-info">
-              <h3><a href="../../products/coreactive-resistance-band-set/index.html">Chalk Bag</a></h3>
-              <span class="cas-card-price">€11,00</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- ═══ APPAREL LOOKBOOK BANNER ═══ -->
-      <section class="cas-lookbook" id="shop-apparel">
-        <div class="cas-lookbook-card">
-          <img src="../../assets/origin/ballinfit/cdn/shop/files/IMG_5031_copy_1bef4105-aafc-4620-8ffc-687466c37b76--54b96396.jpg" alt="CoreActive Apparel" loading="lazy">
-          <div class="cas-lookbook-overlay"></div>
-          <div class="cas-lookbook-copy">
-            <span class="cas-row-kicker" style="color: rgba(255,255,255,0.7);">Coming Soon</span>
-            <h2>CoreActive Apparel</h2>
-            <p>Performance wear designed for structured training. Built to move, breathe, and last.</p>
-            <a class="cas-btn cas-btn--outline" href="../../join/index.html">Get Notified</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══ BOTTOM CTA ═══ -->
-      <section class="cas-bottom-cta">
-        <h2>Can't decide?</h2>
-        <p>Start with a free 7-day trial and experience the training floor first.</p>
-        <a class="cas-btn cas-btn--solid" href="../../join/index.html">Start Free Trial</a>
       </section>
 
     </main>
     <div data-ca-footer></div>
-
-    <script>
-    (() => {
-      /* ── Category scroll arrows ── */
-      document.querySelectorAll('.cas-row').forEach((row) => {
-        const track = row.querySelector('[data-cas-track]');
-        if (!track) return;
-        const cardW = () => {
-          const card = track.querySelector('.cas-card');
-          return card ? card.offsetWidth + 16 : 300;
-        };
-        row.querySelectorAll('[data-cas-scroll]').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const dir = btn.dataset.casScroll === 'prev' ? -1 : 1;
-            track.scrollBy({ left: dir * cardW(), behavior: 'smooth' });
-          });
-        });
-      });
-
-      /* ── Category filter pills ── */
-      const pills = document.querySelectorAll('[data-cas-filter]');
-      pills.forEach((pill) => {
-        pill.addEventListener('click', (e) => {
-          e.preventDefault();
-          pills.forEach((p) => p.classList.remove('is-active'));
-          pill.classList.add('is-active');
-          const filter = pill.dataset.casFilter;
-          const target = filter === 'all' ? null : document.getElementById('shop-' + filter);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        });
-      });
-    })();
-    </script>
   </body>
 </html>

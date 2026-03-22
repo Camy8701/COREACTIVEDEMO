@@ -1,18 +1,17 @@
 /* ═══════════════════════════════════════════════════════
    CoreActive Shop — Storefront Stylesheet
-   Inspired by Gymshark + streetwear editorial layouts
+   Clean layout inspired by Gymshark shop pages
    ═══════════════════════════════════════════════════════ */
 
-/* ── Base overrides ── */
 .ca-page--shop .ca-main.ca-shop-main {
   padding: 0;
 }
 
-/* ═══ FULL-BLEED HERO ═══ */
+/* ═══ HERO ═══ */
 .cas-hero {
   position: relative;
   width: 100%;
-  min-height: 92svh;
+  min-height: 88svh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -24,7 +23,8 @@
   inset: 0;
 }
 
-.cas-hero-media img {
+.cas-hero-media img,
+.cas-hero-media video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -35,27 +35,27 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(0deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.18) 45%, rgba(0,0,0,0.04) 70%),
-    linear-gradient(90deg, rgba(0,0,0,0.42) 0%, transparent 50%);
+    linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.02) 75%),
+    linear-gradient(90deg, rgba(0,0,0,0.35) 0%, transparent 55%);
   z-index: 1;
 }
 
 .cas-hero-content {
   position: relative;
   z-index: 2;
-  max-width: 680px;
-  padding: clamp(32px, 6vw, 80px) clamp(24px, 4vw, 64px);
+  max-width: 620px;
+  padding: clamp(28px, 5vw, 72px) clamp(20px, 4vw, 56px);
 }
 
 .cas-hero-kicker {
   display: inline-block;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 12px;
-  padding-left: 34px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 10px;
+  padding-left: 32px;
   position: relative;
 }
 
@@ -64,154 +64,274 @@
   position: absolute;
   left: 0;
   top: 50%;
-  width: 24px;
+  width: 22px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .cas-hero-title {
   margin: 0;
-  font-size: clamp(3.2rem, 8vw, 6.4rem);
+  font-size: clamp(2.8rem, 7.5vw, 5.6rem);
   font-weight: 800;
-  line-height: 0.92;
+  line-height: 0.93;
   letter-spacing: -0.05em;
   text-transform: uppercase;
   color: #fff;
 }
 
 .cas-hero-sub {
-  margin: 18px 0 0;
-  font-size: clamp(0.88rem, 1.4vw, 1.05rem);
+  margin: 16px 0 0;
+  font-size: clamp(0.86rem, 1.3vw, 1rem);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.65);
-  max-width: 440px;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 400px;
 }
 
 .cas-hero-cta {
   display: inline-flex;
   align-items: center;
-  margin-top: 28px;
+  margin-top: 24px;
   padding: 14px 36px;
   background: #fff;
   color: #0a0a0a;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   border: none;
-  border-radius: 0;
-  transition: background 200ms ease, transform 200ms ease;
+  transition: background 180ms ease, transform 180ms ease;
 }
 
 .cas-hero-cta:hover {
-  background: #e8e8e8;
+  background: #e6e6e6;
   transform: translateY(-1px);
 }
 
-/* ═══ CATEGORY NAV STRIP ═══ */
-.cas-cat-strip {
-  position: sticky;
-  top: 0;
-  z-index: 90;
-  background: rgba(6, 6, 6, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+/* ═══ PRODUCTS SECTION ═══ */
+.cas-products {
+  padding: clamp(48px, 6vw, 88px) clamp(20px, 4vw, 56px);
 }
 
-.cas-cat-inner {
+.cas-products-header {
+  margin-bottom: 32px;
+}
+
+.cas-row-kicker {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin-bottom: 4px;
+}
+
+.cas-row-title {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ── Product grid ── */
+.cas-product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ── Product card ── */
+.cas-product-card {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0c0c0c;
+  transition: border-color 250ms ease;
+}
+
+.cas-product-card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.cas-product-media {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.cas-product-img-wrap {
+  aspect-ratio: 4 / 3;
+  background: #f5f5f5;
   display: flex;
-  gap: 6px;
-  padding: 14px clamp(16px, 3vw, 48px);
-  overflow-x: auto;
-  scrollbar-width: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
 }
 
-.cas-cat-inner::-webkit-scrollbar {
-  display: none;
+.cas-product-img-wrap--dark {
+  background: #111;
+  padding: 0;
 }
 
-.cas-cat-pill {
-  flex-shrink: 0;
-  padding: 8px 20px;
+.cas-product-img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cas-product-card:hover .cas-product-img-wrap img {
+  transform: scale(1.05);
+}
+
+.cas-product-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.cas-product-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  background: #fff;
+  color: #0a0a0a;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cas-product-tag--soon {
+  background: #0a0a0a;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cas-product-details {
+  padding: 22px 24px 26px;
+}
+
+.cas-product-details h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.cas-product-details h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cas-product-details h3 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cas-product-desc {
+  margin: 8px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.cas-product-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.cas-product-price {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.cas-product-buy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  transition: background 180ms ease;
+}
+
+.cas-product-buy:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.cas-product-buy svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 180ms ease;
+}
+
+.cas-product-buy:hover svg {
+  transform: translateX(3px);
+}
+
+.cas-product-notify {
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 100px;
-  transition: all 180ms ease;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease;
 }
 
-.cas-cat-pill:hover {
-  color: #fff;
+.cas-product-notify:hover {
+  color: rgba(255, 255, 255, 0.7);
   border-color: rgba(255, 255, 255, 0.25);
 }
 
-.cas-cat-pill.is-active {
-  color: #0a0a0a;
-  background: #fff;
-  border-color: #fff;
+/* ═══ MEMBERSHIP CTA BANNER ═══ */
+.cas-membership-banner {
+  padding: 0 clamp(20px, 4vw, 56px) clamp(48px, 6vw, 88px);
 }
 
-/* ═══ FEATURED PRODUCT BANNER ═══ */
-.cas-featured {
+.cas-membership-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  margin: 0;
-  min-height: 520px;
-  background: #0e0e0e;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.cas-featured-media {
-  position: relative;
-  background: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 48px;
+  border-radius: 10px;
   overflow: hidden;
+  background: #0c0c0c;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  min-height: 400px;
 }
 
-.cas-featured-media img {
-  max-width: 100%;
-  max-height: 420px;
-  object-fit: contain;
-  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.cas-featured:hover .cas-featured-media img {
-  transform: scale(1.04);
-}
-
-.cas-featured-content {
+.cas-membership-copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(32px, 5vw, 72px);
-  gap: 14px;
+  padding: clamp(28px, 4vw, 56px);
+  gap: 8px;
 }
 
-.cas-badge {
-  display: inline-flex;
-  align-self: flex-start;
-  padding: 5px 14px;
-  background: #fff;
-  color: #0a0a0a;
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.cas-featured-title {
+.cas-membership-title {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
   font-weight: 800;
   letter-spacing: -0.04em;
   text-transform: uppercase;
@@ -219,33 +339,28 @@
   line-height: 0.96;
 }
 
-.cas-featured-desc {
-  margin: 0;
-  font-size: 0.92rem;
+.cas-membership-copy p {
+  margin: 4px 0 0;
+  font-size: 0.88rem;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.6);
-  max-width: 400px;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 380px;
 }
 
-.cas-featured-price {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-top: 4px;
+.cas-membership-visual {
+  position: relative;
+  overflow: hidden;
 }
 
-.cas-price {
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: #fff;
+.cas-membership-visual video,
+.cas-membership-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.cas-featured-actions {
-  margin-top: 8px;
-}
-
-/* ═══ SHARED BUTTONS ═══ */
+/* ═══ SHARED BUTTON ═══ */
 .cas-btn {
   display: inline-flex;
   align-items: center;
@@ -258,17 +373,8 @@
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: all 200ms ease;
-}
-
-.cas-btn svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 200ms ease;
-}
-
-.cas-btn:hover svg {
-  transform: translateX(3px);
+  transition: all 180ms ease;
+  margin-top: 8px;
 }
 
 .cas-btn--solid {
@@ -280,296 +386,26 @@
   background: #e4e4e4;
 }
 
-.cas-btn--outline {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.cas-btn--outline:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* ═══ PRODUCT ROW SECTIONS ═══ */
-.cas-row {
-  padding: clamp(40px, 5vw, 72px) clamp(16px, 3vw, 48px) 0;
-}
-
-.cas-row-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.cas-row-kicker {
-  display: block;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 4px;
-}
-
-.cas-row-title {
-  margin: 0;
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.cas-row-nav {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
-.cas-arrow {
-  appearance: none;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  transition: background 180ms ease, border-color 180ms ease;
-}
-
-.cas-arrow:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.35);
-}
-
-.cas-arrow svg {
-  width: 18px;
-  height: 18px;
-}
-
-/* ═══ HORIZONTAL SCROLL TRACK ═══ */
-.cas-track {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding-bottom: 8px;
-}
-
-.cas-track::-webkit-scrollbar {
-  display: none;
-}
-
-/* ═══ PRODUCT CARDS ═══ */
-.cas-card {
-  flex: 0 0 calc(25% - 12px);
-  min-width: 240px;
-  scroll-snap-align: start;
-}
-
-.cas-card-media {
-  position: relative;
-  display: block;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  background: #111;
-  border-radius: 6px;
-}
-
-.cas-card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.cas-card:hover .cas-card-media img {
-  transform: scale(1.06);
-}
-
-.cas-card-tag {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 4px 10px;
-  background: #fff;
-  color: #0a0a0a;
-  font-size: 0.6rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.cas-card-info {
-  padding: 12px 4px 0;
-}
-
-.cas-card-info h3 {
-  margin: 0;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: -0.01em;
-}
-
-.cas-card-info h3 a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.cas-card-info h3 a:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.cas-card-price {
-  display: block;
-  margin-top: 4px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.55);
-  letter-spacing: 0.04em;
-}
-
-/* ═══ LOOKBOOK BANNER ═══ */
-.cas-lookbook {
-  padding: clamp(40px, 5vw, 72px) clamp(16px, 3vw, 48px) 0;
-}
-
-.cas-lookbook-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 6px;
-  min-height: 480px;
-  display: flex;
-  align-items: flex-end;
-}
-
-.cas-lookbook-card > img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.cas-lookbook-card:hover > img {
-  transform: scale(1.03);
-}
-
-.cas-lookbook-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.12) 55%);
-  z-index: 1;
-}
-
-.cas-lookbook-copy {
-  position: relative;
-  z-index: 2;
-  padding: clamp(28px, 4vw, 56px);
-  max-width: 520px;
-}
-
-.cas-lookbook-copy h2 {
-  margin: 8px 0 10px;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 0.96;
-}
-
-.cas-lookbook-copy p {
-  margin: 0 0 20px;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.65);
-  max-width: 380px;
-}
-
-/* ═══ BOTTOM CTA ═══ */
-.cas-bottom-cta {
-  text-align: center;
-  padding: clamp(56px, 8vw, 112px) clamp(16px, 3vw, 48px);
-}
-
-.cas-bottom-cta h2 {
-  margin: 0;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.cas-bottom-cta p {
-  margin: 12px auto 0;
-  max-width: 420px;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.cas-bottom-cta .cas-btn {
-  margin-top: 28px;
-}
-
 /* ═══ RESPONSIVE ═══ */
-@media (max-width: 900px) {
-  .cas-featured {
+@media (max-width: 768px) {
+  .cas-product-grid {
     grid-template-columns: 1fr;
   }
 
-  .cas-featured-media {
-    min-height: 320px;
+  .cas-membership-inner {
+    grid-template-columns: 1fr;
   }
 
-  .cas-card {
-    flex: 0 0 calc(50% - 8px);
-    min-width: 200px;
+  .cas-membership-visual {
+    min-height: 280px;
+    order: -1;
   }
-}
 
-@media (max-width: 600px) {
   .cas-hero {
-    min-height: 80svh;
+    min-height: 75svh;
   }
 
   .cas-hero-title {
-    font-size: 2.6rem;
-  }
-
-  .cas-hero-cta {
-    padding: 12px 28px;
-  }
-
-  .cas-card {
-    flex: 0 0 calc(70% - 8px);
-    min-width: 180px;
-  }
-
-  .cas-arrow {
-    width: 36px;
-    height: 36px;
-  }
-
-  .cas-arrow svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  .cas-lookbook-card {
-    min-height: 380px;
+    font-size: 2.4rem;
   }
 }
