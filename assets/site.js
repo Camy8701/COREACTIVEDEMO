@@ -90,8 +90,8 @@ const buildHeaderConfig = () => ({
     src: 'assets/brand/coreactive-sports-logo.avif',
   },
   languages: [
-    { code: 'en', label: 'EN' },
-    { code: 'de', label: 'DE' },
+    { code: 'en', label: 'EN', flag: '🇬🇧' },
+    { code: 'fr', label: 'FR', flag: '🇫🇷' },
   ],
   left: [
     {
@@ -289,19 +289,27 @@ const readStoredLocale = (languages) => {
   return supported.has(stored) ? stored : fallback;
 };
 
-const renderLanguageToggle = (languages, locale, context) =>
-  `<div class="ca-language-toggle" role="group" aria-label="Language selector">
-    ${languages
-      .map((language) => {
-        const active = language.code === locale;
-        return `<button type="button" class="ca-language-option${
-          active ? ' is-active' : ''
-        }" data-locale-option="${escapeHtml(language.code)}" data-locale-context="${escapeHtml(
-          context
-        )}" aria-pressed="${active}">${escapeHtml(language.label)}</button>`;
-      })
-      .join('')}
+const renderLanguageToggle = (languages, locale, context) => {
+  const current = languages.find((l) => l.code === locale) || languages[0];
+  return `<div class="ca-language-dropdown" data-lang-dropdown data-locale-context="${escapeHtml(context)}">
+    <button type="button" class="ca-language-trigger" data-lang-trigger aria-expanded="false" aria-haspopup="listbox">
+      <span class="ca-lang-flag">${current.flag}</span>
+      <span class="ca-lang-code">${escapeHtml(current.label)}</span>
+      ${svgIcons.chevron}
+    </button>
+    <ul class="ca-language-menu" role="listbox" data-lang-menu>
+      ${languages
+        .map((language) => {
+          const active = language.code === locale;
+          return `<li role="option" aria-selected="${active}" class="ca-language-menu-item${active ? ' is-active' : ''}" data-locale-option="${escapeHtml(language.code)}" data-locale-context="${escapeHtml(context)}">
+            <span class="ca-lang-flag">${language.flag}</span>
+            <span class="ca-lang-code">${escapeHtml(language.label)}</span>
+          </li>`;
+        })
+        .join('')}
+    </ul>
   </div>`;
+};
 
 const renderDesktopItem = (item) => {
   const active = headerItemIsCurrent(item);
@@ -548,17 +556,35 @@ const renderReplicaFooter = (config) => `
 `;
 
 const syncLocaleUI = (scope, languages, locale) => {
-  const localeLabel =
-    languages.find((language) => language.code === locale)?.label || locale.toUpperCase();
+  const current = languages.find((language) => language.code === locale) || languages[0];
+  const localeLabel = current?.label || locale.toUpperCase();
 
-  scope.querySelectorAll('[data-locale-option]').forEach((button) => {
-    const active = button.getAttribute('data-locale-option') === locale;
-    button.classList.toggle('is-active', active);
-    button.setAttribute('aria-pressed', String(active));
+  scope.querySelectorAll('[data-locale-option]').forEach((item) => {
+    const active = item.getAttribute('data-locale-option') === locale;
+    item.classList.toggle('is-active', active);
+    if (item.hasAttribute('aria-selected')) {
+      item.setAttribute('aria-selected', String(active));
+    } else {
+      item.setAttribute('aria-pressed', String(active));
+    }
+  });
+
+  scope.querySelectorAll('[data-lang-trigger]').forEach((trigger) => {
+    const flagSpan = trigger.querySelector('.ca-lang-flag');
+    const codeSpan = trigger.querySelector('.ca-lang-code');
+    if (flagSpan && current) flagSpan.textContent = current.flag;
+    if (codeSpan) codeSpan.textContent = localeLabel;
   });
 
   scope.querySelectorAll('[data-locale-current]').forEach((node) => {
     node.textContent = localeLabel;
+  });
+
+  /* close all open dropdowns */
+  scope.querySelectorAll('[data-lang-dropdown]').forEach((dd) => {
+    dd.classList.remove('is-open');
+    const trig = dd.querySelector('[data-lang-trigger]');
+    if (trig) trig.setAttribute('aria-expanded', 'false');
   });
 
   document.documentElement.lang = locale;
@@ -743,6 +769,25 @@ const bindReplicaHeader = (wrapper, config) => {
         return;
       }
       handleLocaleChange(locale);
+    });
+  });
+
+  /* language dropdown toggle */
+  wrapper.querySelectorAll('[data-lang-trigger]').forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const dd = trigger.closest('[data-lang-dropdown]');
+      if (!dd) return;
+      const isOpen = dd.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+  document.addEventListener('click', () => {
+    wrapper.querySelectorAll('[data-lang-dropdown].is-open').forEach((dd) => {
+      dd.classList.remove('is-open');
+      const trig = dd.querySelector('[data-lang-trigger]');
+      if (trig) trig.setAttribute('aria-expanded', 'false');
     });
   });
 
@@ -1002,10 +1047,28 @@ const initHomeCarousel = (carousel) => {
     return;
   }
 
+  /* --- arrows --- */
+  const prevBtn = document.createElement('button');
+  prevBtn.type = 'button';
+  prevBtn.className = 'ca-carousel-arrow ca-carousel-arrow--prev';
+  prevBtn.setAttribute('aria-label', 'Previous slide');
+  prevBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>`;
+
+  const nextBtn = document.createElement('button');
+  nextBtn.type = 'button';
+  nextBtn.className = 'ca-carousel-arrow ca-carousel-arrow--next';
+  nextBtn.setAttribute('aria-label', 'Next slide');
+  nextBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`;
+
+  carousel.appendChild(prevBtn);
+  carousel.appendChild(nextBtn);
+
   let index = 1;
   let timerId = 0;
+  let isTransitioning = false;
 
   const setPosition = (immediate = false) => {
+    if (!immediate) isTransitioning = true;
     track.style.transition = immediate ? 'none' : 'transform 1100ms cubic-bezier(0.22, 1, 0.36, 1)';
     track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
   };
@@ -1017,20 +1080,37 @@ const initHomeCarousel = (carousel) => {
     }
   };
 
+  const goNext = () => {
+    if (isTransitioning) return;
+    index += 1;
+    setPosition();
+  };
+
+  const goPrev = () => {
+    if (isTransitioning) return;
+    index -= 1;
+    if (index < 0) index = totalSlides;
+    setPosition();
+  };
+
   const start = () => {
     stop();
-    timerId = window.setInterval(() => {
-      index += 1;
-      setPosition();
-    }, 7000);
+    timerId = window.setInterval(goNext, 4000);
   };
 
   track.addEventListener('transitionend', () => {
+    isTransitioning = false;
     if (index === totalSlides + 1) {
       index = 1;
       setPosition(true);
+    } else if (index === 0) {
+      index = totalSlides;
+      setPosition(true);
     }
   });
+
+  prevBtn.addEventListener('click', () => { stop(); goPrev(); start(); });
+  nextBtn.addEventListener('click', () => { stop(); goNext(); start(); });
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
@@ -1097,13 +1177,19 @@ const enhanceHomePage = () => {
     if (descriptionNode) {
       descriptionNode.innerHTML = '<p>Structured training for real results across every level.</p>';
     }
-    if (buttons[0]) {
-      buttons[0].textContent = 'Start Training';
-      buttons[0].setAttribute('href', siteUrl('pages/classes/index.html'));
-    }
-    if (buttons[1]) {
-      buttons[1].textContent = 'Join Now';
-      buttons[1].setAttribute('href', siteUrl('join/index.html'));
+
+    const ctaWrapper = videoSection.querySelector('.hero__cta__wrapper');
+    if (ctaWrapper) {
+      ctaWrapper.innerHTML = `
+        <a class="ca-hero-cta-main" href="${siteUrl('join/index.html')}">
+          <span class="ca-hero-cta-badge">7 DAYS FREE</span>
+          <span class="ca-hero-cta-label">Start Training</span>
+          <span class="ca-hero-cta-sub">No commitment &middot; Cancel anytime</span>
+        </a>
+        <a class="standard__cta hero__btn btn btn--white btn--long" href="${siteUrl('pages/classes/index.html')}">
+          Explore Programs
+        </a>
+      `;
     }
   }
 
@@ -1241,15 +1327,6 @@ const enhanceHomePage = () => {
 
   if (videoSectionRoot instanceof HTMLElement && !existingCarousel && sliderSourceSections.length) {
     const slides = [
-      {
-        kind: 'text',
-        align: 'left',
-        kicker: 'Start Here',
-        title: '7 Days Free',
-        descriptionHtml:
-          '<p>Start with a 7-day introduction to structured training and find the CoreActive program that fits your level.</p><p>UrbanFit brings the group energy. PulseLab sharpens performance.</p>',
-        cta: { label: 'Start Training', href: 'join/index.html' },
-      },
       {
         kind: 'text',
         align: 'left',
