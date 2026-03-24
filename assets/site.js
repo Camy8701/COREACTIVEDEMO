@@ -1194,14 +1194,12 @@ const enhanceHomePage = () => {
     const ctaWrapper = videoSection.querySelector('.hero__cta__wrapper');
     if (ctaWrapper) {
       ctaWrapper.innerHTML = `
-        <div class="ca-hero-btns">
-          <a class="standard__cta hero__btn btn btn--white btn--long" href="${siteUrl('join/index.html')}">
-            Join Now
-          </a>
-          <a class="standard__cta hero__btn btn btn--primary btn--long" href="${siteUrl('pages/classes/index.html')}">
-            Explore Programs
-          </a>
-        </div>
+        <a class="standard__cta hero__btn btn btn--white btn--long" href="${siteUrl('join/index.html')}">
+          Join Now
+        </a>
+        <a class="standard__cta hero__btn btn btn--primary btn--long" href="${siteUrl('pages/classes/index.html')}">
+          Explore Programs
+        </a>
         <a class="ca-hero-login-link" href="${siteUrl('account/index.html')}">Existing customer? <strong>Log in</strong></a>
       `;
     }

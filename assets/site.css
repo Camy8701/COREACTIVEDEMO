@@ -3429,9 +3429,10 @@ body#join-the-ballinfit-family .bf-btn {
 
 [data-section-type="video"] .hero__content__wrapper.align--middle-center {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   text-align: center;
+  padding-bottom: clamp(36px, 5vw, 72px);
 }
 
 [data-section-type="video"] .hero__content__wrapper.align--middle-center .hero__content {
@@ -3462,8 +3463,11 @@ body#join-the-ballinfit-family .bf-btn {
 
 [data-section-type="video"] .hero__content__wrapper.align--middle-center .hero__cta__wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
   margin-top: 28px;
 }
 
@@ -3479,6 +3483,8 @@ body#join-the-ballinfit-family .bf-btn {
 
 .ca-hero-login-link {
   display: block;
+  flex-basis: 100%;
+  text-align: center;
   margin-top: 18px;
   font-size: 0.72rem;
   font-weight: 500;
