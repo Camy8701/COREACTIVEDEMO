@@ -1172,23 +1172,37 @@ const enhanceHomePage = () => {
     const buttons = [...videoSection.querySelectorAll('.hero__cta__wrapper a')];
 
     if (titleNode) {
-      titleNode.innerHTML = '<p>Train with purpose.<br>Perform at your peak.</p>';
+      titleNode.innerHTML = '<p>7 Days Free</p>';
     }
     if (descriptionNode) {
-      descriptionNode.innerHTML = '<p>Structured training for real results across every level.</p>';
+      descriptionNode.innerHTML = '<p>On Yearly Memberships</p>';
+    }
+
+    /* center the hero content */
+    const heroContent = videoSection.querySelector('.hero__content__wrapper');
+    if (heroContent) {
+      heroContent.className = heroContent.className.replace(/align--\S+/g, '') + ' align--middle-center';
+    }
+    const heroContentInner = videoSection.querySelector('.hero__content');
+    if (heroContentInner) {
+      heroContentInner.style.textAlign = 'center';
+      heroContentInner.style.display = 'flex';
+      heroContentInner.style.flexDirection = 'column';
+      heroContentInner.style.alignItems = 'center';
     }
 
     const ctaWrapper = videoSection.querySelector('.hero__cta__wrapper');
     if (ctaWrapper) {
       ctaWrapper.innerHTML = `
-        <a class="ca-hero-cta-main" href="${siteUrl('join/index.html')}">
-          <span class="ca-hero-cta-badge">7 DAYS FREE</span>
-          <span class="ca-hero-cta-label">Start Training</span>
-          <span class="ca-hero-cta-sub">No commitment &middot; Cancel anytime</span>
-        </a>
-        <a class="standard__cta hero__btn btn btn--white btn--long" href="${siteUrl('pages/classes/index.html')}">
-          Explore Programs
-        </a>
+        <div class="ca-hero-btns">
+          <a class="standard__cta hero__btn btn btn--white btn--long" href="${siteUrl('join/index.html')}">
+            Join Now
+          </a>
+          <a class="standard__cta hero__btn btn btn--primary btn--long" href="${siteUrl('pages/classes/index.html')}">
+            Explore Programs
+          </a>
+        </div>
+        <a class="ca-hero-login-link" href="${siteUrl('account/index.html')}">Existing customer? <strong>Log in</strong></a>
       `;
     }
   }
